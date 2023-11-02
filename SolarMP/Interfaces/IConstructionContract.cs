@@ -1,0 +1,17 @@
+﻿using SolarMP.DTOs.ConstructionContract;
+using SolarMP.DTOs.Promotions;
+using SolarMP.Models;
+
+namespace SolarMP.Interfaces
+{
+    public interface IConstructionContract
+    {
+        Task<List<ConstructionContract>> GetConstructionContractById(string? constructionContractId);
+        Task<List<ConstructionContract>> GetConstructionContractByCusId(string cusId);
+        Task<List<ConstructionContract>> GetConstructionContractByStaffId(string StaffId);
+        Task<List<ConstructionContract>> GetAllConstructionContracts();
+        Task<bool> UpdateConstructionContract(ConstructionContractUpdateDTO upConstructionContract);
+        Task<bool> DeleteConstructionContract(string constructionContractId);
+        Task<bool> InsertConstructionContract(ConstructionContractDTO constructionContract);
+    }
+}
