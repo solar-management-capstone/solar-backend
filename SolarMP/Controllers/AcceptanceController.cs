@@ -32,6 +32,10 @@ namespace SolarMP.Controllers
                 return BadRequest(responseAPI);
             }
         }
+        /// <summary>
+        /// tesst cái nè
+        /// </summary>
+        /// <returns></returns>
         [Route("get-all-Acceptance-admin")]
         [HttpGet]
         public async Task<IActionResult> GetAllAcceptancesad()
