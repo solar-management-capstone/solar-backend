@@ -152,6 +152,13 @@ namespace SolarMP.Services
             {
                 var account = await this.context.Account
                     .Include(x=>x.Role)
+                    .Include(x=>x.ConstructionContractCustomer)
+                    .Include(x=>x.ConstructionContractStaff)
+                    .Include(x=>x.Feedback)
+                    .Include(x=>x.RequestAccount)
+                    .Include(x=>x.RequestStaff)
+                    .Include(x=>x.PaymentProcess)
+                    .Include(x=>x.Survey)
                     .ToListAsync();
                 return account;
             }catch(Exception ex)
@@ -179,7 +186,15 @@ namespace SolarMP.Services
         {
             try
             {
-                var check = await this.context.Account.Where(x=>x.AccountId.Equals(id)).FirstOrDefaultAsync();
+                var check = await this.context.Account.Where(x=>x.AccountId.Equals(id))
+                    .Include(x => x.ConstructionContractCustomer)
+                    .Include(x => x.ConstructionContractStaff)
+                    .Include(x => x.Feedback)
+                    .Include(x => x.RequestAccount)
+                    .Include(x => x.RequestStaff)
+                    .Include(x => x.PaymentProcess)
+                    .Include(x => x.Survey)
+                    .FirstOrDefaultAsync();
                 if (check != null)
                 {
                     return check;
@@ -198,7 +213,15 @@ namespace SolarMP.Services
         {
             try
             {
-                var check = await this.context.Account.Where(x => x.Firstname.Contains(name) || x.Lastname.Contains(name)).ToListAsync();
+                var check = await this.context.Account.Where(x => x.Firstname.Contains(name) || x.Lastname.Contains(name))
+                    .Include(x => x.ConstructionContractCustomer)
+                    .Include(x => x.ConstructionContractStaff)
+                    .Include(x => x.Feedback)
+                    .Include(x => x.RequestAccount)
+                    .Include(x => x.RequestStaff)
+                    .Include(x => x.PaymentProcess)
+                    .Include(x => x.Survey)
+                    .ToListAsync();
                 if (check != null)
                 {
                     return check;
