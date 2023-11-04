@@ -15,6 +15,7 @@ namespace SolarMP.DTOs.Account
         public bool? Status { get; set; }
         public bool? IsGoogleProvider { get; set; } = false;
         public bool? IsLeader { get; set; }
+        public string? RoleId { get; set; }
 
     }
 }

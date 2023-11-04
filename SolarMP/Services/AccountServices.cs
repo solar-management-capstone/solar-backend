@@ -330,6 +330,7 @@ namespace SolarMP.Services
                     check.IsGoogleProvider = dto.IsGoogleProvider ?? check.IsGoogleProvider;
                     check.Status = dto.Status ?? check.Status;
                     check.IsLeader = dto.IsLeader ?? check.IsLeader;
+                    check.RoleId = dto.RoleId ?? check.RoleId;
                     this.context.Account.Update(check);
                     this.context.SaveChangesAsync();
                     return check;
