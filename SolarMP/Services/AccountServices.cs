@@ -248,6 +248,8 @@ namespace SolarMP.Services
                 account.Status = true;
                 account.CreateAt = DateTime.Now;
                 account.IsGoogleProvider = dto.IsGoogleProvider;
+                account.IsLeader = false;
+                account.IsFree = true;
 
                 string digitsOnly = new string(dto.Phone.Where(char.IsDigit).ToArray());
 

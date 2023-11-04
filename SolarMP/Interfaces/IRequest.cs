@@ -12,6 +12,8 @@ namespace SolarMP.Interfaces
         Task<List<Request>> getAllForStaff(string id);
         Task<List<Request>> getAllForPackage(string id);
         Task<Request> assignStaff(RequestUpdateDTO dto);
+        Task<Request> updateRequest(string id);
+        Task<List<Account>> searchStaffFree();
 
     }
 }

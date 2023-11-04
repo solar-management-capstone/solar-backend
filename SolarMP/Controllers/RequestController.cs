@@ -34,6 +34,22 @@ namespace SolarMP.Controllers
                 return BadRequest(responseAPI);
             }
         }
+        [Route("get-all-staffFree")]
+        [HttpGet]
+        public async Task<IActionResult> getFree()
+        {
+            ResponseAPI<List<Account>> responseAPI = new ResponseAPI<List<Account>>();
+            try
+            {
+                responseAPI.Data = await this.service.searchStaffFree();
+                return Ok(responseAPI);
+            }
+            catch (Exception ex)
+            {
+                responseAPI.Message = ex.Message;
+                return BadRequest(responseAPI);
+            }
+        }
         [Route("get-request-account")]
         [HttpGet]
         public async Task<IActionResult> getAcc(string CusId)
@@ -107,6 +123,22 @@ namespace SolarMP.Controllers
             try
             {
                 responseAPI.Data = await this.service.assignStaff(dto);
+                return Ok(responseAPI);
+            }
+            catch (Exception ex)
+            {
+                responseAPI.Message = ex.Message;
+                return BadRequest(responseAPI);
+            }
+        }
+        [Route("disable-request")]
+        [HttpPut]
+        public async Task<IActionResult> update(string requestId)
+        {
+            ResponseAPI<List<Request>> responseAPI = new ResponseAPI<List<Request>>();
+            try
+            {
+                responseAPI.Data = await this.service.updateRequest(requestId);
                 return Ok(responseAPI);
             }
             catch (Exception ex)

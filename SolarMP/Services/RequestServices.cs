@@ -23,6 +23,11 @@ namespace SolarMP.Services
                     check.StaffId= dto.StaffId;
                     this.context.Request.Update(check);
                     await this.context.SaveChangesAsync();
+
+                    var staff = await this.context.Account.Where(x => x.AccountId.Equals(dto.StaffId)).FirstOrDefaultAsync();
+                    staff.IsFree = false;
+                    this.context.Account.Update(staff);
+                    await this.context.SaveChangesAsync();
                     return check;
                 }
                 else
@@ -144,6 +149,56 @@ namespace SolarMP.Services
                 await this.context.SaveChangesAsync();
 
                 return request;
+            }catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<List<Account>> searchStaffFree()
+        {
+            try
+            {
+                var check = await this.context.Account.Where(x=>x.Status && x.IsLeader == true)
+                    .Include(x=>x.RequestStaff.Where(x=>x.Status))
+                    .ToListAsync();
+                if(check != null)
+                {
+                    return check;
+                }
+                return null;
+            }catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<Request> updateRequest(string id)
+        {
+            try
+            {
+                var check = await this.context.Request.Where(x => x.RequestId.Equals(id)).FirstOrDefaultAsync();
+                if(check != null)
+                {
+                    check.Status = false;
+                    this.context.Request.Update(check);
+                    await this.context.SaveChangesAsync();
+
+                    var staff = await this.context.Account.Where(x => x.AccountId.Equals(check.AccountId))
+                    .Include(x => x.RequestStaff.Where(x => x.Status))
+                    .FirstOrDefaultAsync();
+                    if(staff == null)
+                    {
+                        staff.IsFree = true;
+                        this.context.Account.Update(staff);
+                        await this.context.SaveChangesAsync();
+                    }
+                    return check;
+                }
+                else
+                {
+                    return null;
+                }
             }catch (Exception ex)
             {
                 throw new Exception(ex.Message);

@@ -67,6 +67,8 @@ namespace SolarMP.Models
         public bool IsGoogleProvider { get; set; }
         [Column("isLeader")]
         public bool? IsLeader { get; set; }
+        [Column("isFree")]
+        public bool? IsFree { get; set; }
 
         [ForeignKey("RoleId")]
         [InverseProperty("Account")]
