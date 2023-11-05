@@ -16,7 +16,7 @@ namespace SolarMP.Controllers
         {
             this.service = service;
         }
-        [Route("getall-survey")]
+        [Route("Get-all-survey")]
         [HttpGet]
         public async Task<IActionResult> GetAllSurveys()
         {
@@ -37,7 +37,7 @@ namespace SolarMP.Controllers
         /// </summary>
         /// <param name="surveyId"></param>
         /// <returns></returns>
-        [Route("get-servey-id")]
+        [Route("Get-survey-by-id")]
         [HttpGet]
         public async Task<IActionResult> GetSurveyById(string? surveyId)
         {
@@ -53,7 +53,12 @@ namespace SolarMP.Controllers
                 return BadRequest(responseAPI);
             }
         }
-        [Route("get-servey-staffid")]
+        /// <summary>
+        /// Id by staff
+        /// </summary>
+        /// <param name="staffId"></param>
+        /// <returns></returns>
+        [Route("Get-survey-staffid")]
         [HttpGet]
         public async Task<IActionResult> GetSurveyBystaffId(string staffId)
         {
@@ -93,7 +98,7 @@ namespace SolarMP.Controllers
         /// <summary>
         /// auto generate id
         /// </summary>
-        /// <param name="promotion"></param>
+        /// <param name="survey"></param>
         /// <returns></returns>
         [Route("Insert-survey")]
         [HttpPost]
@@ -114,9 +119,9 @@ namespace SolarMP.Controllers
         /// <summary>
         /// Delete survey with id
         /// </summary>
-        /// <param name="promotionId"></param>
+        /// <param name="surveyId"></param>
         /// <returns></returns>
-        [Route("Delete-promotion")]
+        [Route("Delete-survey-by-Id")]
         [HttpDelete]
         public async Task<IActionResult> DeleteSurvey(string surveyId)
         {
