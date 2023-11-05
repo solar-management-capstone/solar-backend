@@ -41,8 +41,13 @@ namespace SolarMP.Services
         {
             try
             {
-                var data = await this.context.ConstructionContract.Where(x => x.Status)
+                var data = await this.context.ConstructionContract
                     .Include(x=>x.Package)
+                        .ThenInclude(x=>x.PackageProduct)
+                            .ThenInclude(x =>x.Product)
+                                .ThenInclude(x=>x.Image)
+                    .Include(x => x.Package)
+                        .ThenInclude(x=>x.Promotion)
                     .Include(x=>x.Bracket)
                     .Include(x=>x.PaymentProcess)
                     .Include(x=>x.Staff)
@@ -66,6 +71,11 @@ namespace SolarMP.Services
             {
                 var data = await this.context.ConstructionContract.Where(x => x.Status && x.CustomerId.Equals(cusId))
                     .Include(x => x.Package)
+                        .ThenInclude(x => x.PackageProduct)
+                            .ThenInclude(x => x.Product)
+                                .ThenInclude(x => x.Image)
+                    .Include(x => x.Package)
+                        .ThenInclude(x => x.Promotion)
                     .Include(x => x.Bracket)
                     .Include(x => x.PaymentProcess)
                     .Include(x => x.Staff)
@@ -91,6 +101,11 @@ namespace SolarMP.Services
             {
                 var data = await this.context.ConstructionContract.Where(x => x.Status && x.ConstructioncontractId.Equals(constructionContractId))
                     .Include(x => x.Package)
+                        .ThenInclude(x => x.PackageProduct)
+                            .ThenInclude(x => x.Product)
+                                .ThenInclude(x => x.Image)
+                    .Include(x => x.Package)
+                        .ThenInclude(x => x.Promotion)
                     .Include(x => x.Bracket)
                     .Include(x => x.PaymentProcess)
                     .Include(x => x.Staff)
@@ -116,6 +131,11 @@ namespace SolarMP.Services
             {
                 var data = await this.context.ConstructionContract.Where(x => x.Status && x.Staffid.Equals(StaffId))
                     .Include(x => x.Package)
+                        .ThenInclude(x => x.PackageProduct)
+                            .ThenInclude(x => x.Product)
+                                .ThenInclude(x => x.Image)
+                    .Include(x => x.Package)
+                        .ThenInclude(x => x.Promotion)
                     .Include(x => x.Bracket)
                     .Include(x => x.PaymentProcess)
                     .Include(x => x.Staff)
@@ -151,6 +171,19 @@ namespace SolarMP.Services
                 _constructionContract.PackageId = constructionContract.PackageId;
                 _constructionContract.BracketId = constructionContract.BracketId;
                 _constructionContract.Status = true;
+
+                var pck = await this.context.Package.Where(x => x.PackageId.Equals(constructionContract.PackageId))
+                    .Include(x=>x.Promotion)
+                    .FirstOrDefaultAsync();
+                var brc = await this.context.Bracket.Where(x => x.BracketId.Equals(constructionContract.BracketId)).FirstOrDefaultAsync();
+
+                decimal tmp = (decimal)pck.Price;
+                if (pck.Promotion.StartDate < DateTime.Now && pck.Promotion.EndDate > DateTime.Now)
+                {
+                    tmp = (decimal)pck.PromotionPrice;
+                }
+
+                _constructionContract.Totalcost = tmp + brc.Price;
                 await this.context.ConstructionContract.AddAsync(_constructionContract);
                 this.context.SaveChanges();
                 return true;
@@ -178,6 +211,19 @@ namespace SolarMP.Services
                     _constructionContract.PackageId = upConstructionContract.PackageId ?? _constructionContract.PackageId;
                     _constructionContract.BracketId = upConstructionContract.BracketId ?? _constructionContract.BracketId;
                     _constructionContract.Status = upConstructionContract.Status ?? _constructionContract.Status;
+
+                    var pck = await this.context.Package.Where(x => x.PackageId.Equals(upConstructionContract.PackageId ?? _constructionContract.PackageId))
+                    .Include(x => x.Promotion)
+                    .FirstOrDefaultAsync();
+                    var brc = await this.context.Bracket.Where(x => x.BracketId.Equals(upConstructionContract.BracketId ?? _constructionContract.BracketId)).FirstOrDefaultAsync();
+
+                    decimal tmp = (decimal)pck.Price;
+                    if (pck.Promotion.StartDate < DateTime.Now && pck.Promotion.EndDate > DateTime.Now)
+                    {
+                        tmp = (decimal)pck.PromotionPrice;
+                    }
+
+                    _constructionContract.Totalcost = tmp + brc.Price;
                     context.ConstructionContract.Update(_constructionContract);
                     this.context.SaveChanges();
                     return true;
