@@ -10,6 +10,11 @@ namespace SolarMP.Models
 {
     public partial class Request
     {
+        public Request()
+        {
+            Survey = new HashSet<Survey>();
+        }
+
         [Key]
         [Column("requestId")]
         [StringLength(16)]
@@ -46,5 +51,7 @@ namespace SolarMP.Models
         [ForeignKey("StaffId")]
         [InverseProperty("RequestStaff")]
         public virtual Account Staff { get; set; }
+        [InverseProperty("Request")]
+        public virtual ICollection<Survey> Survey { get; set; }
     }
 }

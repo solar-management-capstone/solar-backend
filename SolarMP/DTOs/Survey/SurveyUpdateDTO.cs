@@ -7,5 +7,6 @@
         public string? Note { get; set; }
         public string? StaffId { get; set; }
         public bool? Status { get; set; }
+        public string? RequestId { get; set; }
     }
 }

@@ -44,7 +44,14 @@ namespace SolarMP.Services
                 var data = await this.context.Survey.Where(x => x.Status)
                     .Include(x=>x.Staff)
                     .ToListAsync();
-                return data;
+                if (data.Count > 0 && data != null)
+                {
+                    return data;
+                }
+                else
+                {
+                    return null;
+                }
             }
             catch (Exception ex)
             {
@@ -60,8 +67,13 @@ namespace SolarMP.Services
                     .Include(x => x.Staff)
                     .ToListAsync();
                 if (data.Count > 0 && data != null)
+                {
                     return data;
-                else throw new ArgumentException();
+                }
+                else
+                {
+                    return null;
+                }
             }
             catch (Exception ex)
             {
@@ -78,11 +90,14 @@ namespace SolarMP.Services
                     .ToListAsync();
                 if (data.Count > 0 && data != null)
                     return data;
-                else throw new ArgumentException();
+                else
+                {
+                    return null;
+                }
             }
             catch (Exception ex)
             {
-                throw new ArgumentException("Process went wrong");
+                throw new ArgumentException("Staff không tồn tại trong hệ thống!");
             }
         }
 

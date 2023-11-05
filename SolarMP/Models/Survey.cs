@@ -25,7 +25,14 @@ namespace SolarMP.Models
         public string StaffId { get; set; }
         [Column("status")]
         public bool Status { get; set; }
+        [Column("requestId")]
+        [StringLength(16)]
+        [Unicode(false)]
+        public string RequestId { get; set; }
 
+        [ForeignKey("RequestId")]
+        [InverseProperty("Survey")]
+        public virtual Request Request { get; set; }
         [ForeignKey("StaffId")]
         [InverseProperty("Survey")]
         public virtual Account Staff { get; set; }

@@ -42,7 +42,7 @@ namespace SolarMP.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Data Source=solar123.database.windows.net;Initial Catalog=solarMP;Persist Security Info=True;User ID=solar;Password=Quyen123@");
+                optionsBuilder.UseSqlServer("Data Source=solar123.database.windows.net;Initial Catalog=solarMP;User ID=solar;Password=Quyen123@");
             }
         }
 
@@ -234,6 +234,11 @@ namespace SolarMP.Models
 
             modelBuilder.Entity<Survey>(entity =>
             {
+                entity.HasOne(d => d.Request)
+                    .WithMany(p => p.Survey)
+                    .HasForeignKey(d => d.RequestId)
+                    .HasConstraintName("FK_Survey_Request");
+
                 entity.HasOne(d => d.Staff)
                     .WithMany(p => p.Survey)
                     .HasForeignKey(d => d.StaffId)

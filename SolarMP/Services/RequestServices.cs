@@ -56,8 +56,9 @@ namespace SolarMP.Services
             try
             {
                 var check = await this.context.Request
-                    .Include(x=>x.Staff)
-                    .Include(x=>x.Account)
+                    .Include(x => x.Staff)
+                    .Include(x => x.Account)
+                    .Include(x => x.Survey)
                     .ToListAsync();
                 if (check != null)
                 {
@@ -81,6 +82,7 @@ namespace SolarMP.Services
                     .Include(x => x.Staff)
                     .Include(x => x.Account)
                     .Include(x => x.Package)
+                    .Include(x => x.Survey)
                     .ToListAsync();
                 if (check != null)
                 {
@@ -105,6 +107,7 @@ namespace SolarMP.Services
                     .Include(x => x.Staff)
                     .Include(x => x.Account)
                     .Include(x=>x.Package)
+                    .Include(x => x.Survey)
                     .ToListAsync();
                 if (check != null)
                 {
@@ -128,6 +131,7 @@ namespace SolarMP.Services
                 var check = await this.context.Request.Where(x => x.AccountId.Equals(id))
                     .Include(x => x.Staff)
                     .Include(x => x.Package)
+                    .Include(x => x.Survey)
                     .ToListAsync();
                 if (check != null)
                 {
