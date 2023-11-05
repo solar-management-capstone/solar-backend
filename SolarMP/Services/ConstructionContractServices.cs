@@ -203,7 +203,6 @@ namespace SolarMP.Services
                 {
                     _constructionContract.Startdate = upConstructionContract.Startdate ?? _constructionContract.Startdate;
                     _constructionContract.Enddate = upConstructionContract.Enddate ?? _constructionContract.Enddate;
-                    _constructionContract.Totalcost = upConstructionContract.Totalcost ?? _constructionContract.Totalcost;
                     _constructionContract.IsConfirmed = upConstructionContract.IsConfirmed ?? _constructionContract.IsConfirmed;
                     _constructionContract.ImageFile = upConstructionContract.ImageFile ?? _constructionContract.ImageFile;
                     _constructionContract.CustomerId = upConstructionContract.CustomerId ?? _constructionContract.CustomerId;
@@ -212,18 +211,47 @@ namespace SolarMP.Services
                     _constructionContract.BracketId = upConstructionContract.BracketId ?? _constructionContract.BracketId;
                     _constructionContract.Status = upConstructionContract.Status ?? _constructionContract.Status;
 
-                    var pck = await this.context.Package.Where(x => x.PackageId.Equals(upConstructionContract.PackageId ?? _constructionContract.PackageId))
-                    .Include(x => x.Promotion)
-                    .FirstOrDefaultAsync();
-                    var brc = await this.context.Bracket.Where(x => x.BracketId.Equals(upConstructionContract.BracketId ?? _constructionContract.BracketId)).FirstOrDefaultAsync();
+                    //decimal tmp = 0;
+                    //decimal tmpbck = 0;
+                    //if (upConstructionContract.PackageId!= null)
+                    //{
+                    //    var pck = await this.context.Package.Where(x => x.PackageId.Equals(upConstructionContract.PackageId ?? _constructionContract.PackageId))
+                    //        .Include(x => x.Promotion)
+                    //        .FirstOrDefaultAsync();
+                    //    tmp = (decimal)pck.Price;
+                    //    if (pck.Promotion.StartDate < DateTime.Now && pck.Promotion.EndDate > DateTime.Now)
+                    //    {
+                    //        tmp = (decimal)pck.PromotionPrice;
+                    //    }
+                    //}
+                    //if(upConstructionContract.BracketId!= null)
+                    //{
+                    //    var brc = await this.context.Bracket.Where(x => x.BracketId.Equals(upConstructionContract.BracketId ?? _constructionContract.BracketId)).FirstOrDefaultAsync();
+                    //    tmpbck = (decimal)brc.Price;
+                    //}
+                    //if(tmp > 0)
+                    //{
 
-                    decimal tmp = (decimal)pck.Price;
-                    if (pck.Promotion.StartDate < DateTime.Now && pck.Promotion.EndDate > DateTime.Now)
+                    //}
+                    //if (tmpbck > 0) { 
+                    //}
+                    if(upConstructionContract.BracketId!= null || upConstructionContract.PackageId != null)
                     {
-                        tmp = (decimal)pck.PromotionPrice;
-                    }
+                        var pck = await this.context.Package.Where(x => x.PackageId.Equals(upConstructionContract.PackageId))
+                                    .Include(x => x.Promotion)
+                                    .FirstOrDefaultAsync();
+                        var brc = await this.context.Bracket.Where(x => x.BracketId.Equals(upConstructionContract.BracketId))
+                                    .FirstOrDefaultAsync();
 
-                    _constructionContract.Totalcost = tmp + brc.Price;
+                        decimal tmp = (decimal)pck.Price;
+                        if (pck.Promotion.StartDate < DateTime.Now && pck.Promotion.EndDate > DateTime.Now)
+                        {
+                            tmp = (decimal)pck.PromotionPrice;
+                        }
+
+                        _constructionContract.Totalcost = tmp + brc.Price;
+                    }
+                    
                     context.ConstructionContract.Update(_constructionContract);
                     this.context.SaveChanges();
                     return true;
