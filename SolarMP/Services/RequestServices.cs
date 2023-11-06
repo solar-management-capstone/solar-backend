@@ -23,7 +23,7 @@ namespace SolarMP.Services
                     var staff = await this.context.Account.Where(x => x.AccountId.Equals(dto.StaffId))
                         .Include(x => x.RequestStaff.Where(x => x.Status))
                         .FirstOrDefaultAsync();
-                    if (staff.RequestStaff.Count > 3)
+                    if (staff.RequestStaff.Count >= 3)
                     {
                         throw new Exception("staff nhận 3 request");
                     }
@@ -32,7 +32,7 @@ namespace SolarMP.Services
                     this.context.Request.Update(check);
                     await this.context.SaveChangesAsync();
                     
-                    if (staff.RequestStaff.Count >=3)
+                    if (staff.RequestStaff.Count ==3)
                     {
                         staff.IsFree = false;
                     }
