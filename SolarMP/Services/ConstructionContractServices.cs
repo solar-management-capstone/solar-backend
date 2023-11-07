@@ -87,7 +87,10 @@ namespace SolarMP.Services
                     .ToListAsync();
                 if (data.Count > 0 && data != null)
                     return data;
-                else throw new ArgumentException();
+                else
+                {
+                    return null;
+                }
             }
             catch (Exception ex)
             {
@@ -117,7 +120,10 @@ namespace SolarMP.Services
                     .ToListAsync();
                 if (data.Count > 0 && data != null)
                     return data;
-                else throw new ArgumentException();
+                else
+                {
+                    return null;
+                }
             }
             catch (Exception ex)
             {
@@ -147,7 +153,10 @@ namespace SolarMP.Services
                     .ToListAsync();
                 if (data.Count > 0 && data != null)
                     return data;
-                else throw new ArgumentException();
+                else
+                {
+                    return null;
+                }
             }
             catch (Exception ex)
             {
