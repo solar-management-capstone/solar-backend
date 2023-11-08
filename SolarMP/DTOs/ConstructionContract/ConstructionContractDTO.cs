@@ -16,5 +16,6 @@ namespace SolarMP.DTOs.ConstructionContract
         public string Staffid { get; set; }
         public string PackageId { get; set; }
         public string BracketId { get; set; }
+        public string? Description { get; set; }
     }
 }

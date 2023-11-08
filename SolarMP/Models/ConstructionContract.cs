@@ -54,6 +54,8 @@ namespace SolarMP.Models
         [StringLength(16)]
         [Unicode(false)]
         public string BracketId { get; set; }
+        [Column("description")]
+        public string Description { get; set; }
 
         [ForeignKey("BracketId")]
         [InverseProperty("ConstructionContract")]
