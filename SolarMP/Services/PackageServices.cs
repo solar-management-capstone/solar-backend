@@ -285,5 +285,29 @@ namespace SolarMP.Services
                 throw new Exception(ex.Message);
             }
         }
+
+        public async Task<List<Package>> getAllForMobile(int count)
+        {
+            try
+            {
+                var check = this.context.Package.Where(x => x.Status)
+                    .Include(x => x.PackageProduct)
+                        .ThenInclude(x => x.Product)
+                            .ThenInclude(x => x.Image)
+                    .Include(x => x.Promotion)
+                    .Include(x => x.Feedback)
+                    .OrderByDescending(x => x.ConstructionContract.Count)
+                    .Take(count);
+                if (check != null)
+                {
+                    return (List<Package>)check;
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

@@ -54,6 +54,30 @@ namespace SolarMP.Controllers
             }
         }
 
+        /// <summary>
+        /// truyền vào số nhiêu thì nó trả ra bây nhiêu data
+        /// 
+        /// các gói đặc biệt này hiển thị theo gói nào dc tạo hợp đồng nhiều
+        /// </summary>
+        /// <param name="count"></param>
+        /// <returns></returns>
+        [Route("get-Package-mobileSpecial")]
+        [HttpGet]
+        public async Task<IActionResult> getallSpecial(int count)
+        {
+            ResponseAPI<List<Package>> responseAPI = new ResponseAPI<List<Package>>();
+            try
+            {
+                responseAPI.Data = await this.service.getAllForMobile(count);
+                return Ok(responseAPI);
+            }
+            catch (Exception ex)
+            {
+                responseAPI.Message = ex.Message;
+                return BadRequest(responseAPI);
+            }
+        }
+
         [Route("get-name")]
         [HttpGet]
         public async Task<IActionResult> getName(string name)
