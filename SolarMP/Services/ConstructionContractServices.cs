@@ -21,7 +21,7 @@ namespace SolarMP.Services
                     .FirstOrDefaultAsync();
                 if (con != null)
                 {
-                    con.Status = false;
+                    con.Status = "0";
                     this.context.ConstructionContract.Update(con);
                     await this.context.SaveChangesAsync();
                     return true;
@@ -69,7 +69,7 @@ namespace SolarMP.Services
         {
             try
             {
-                var data = await this.context.ConstructionContract.Where(x => x.Status && x.CustomerId.Equals(cusId))
+                var data = await this.context.ConstructionContract.Where(x => x.CustomerId.Equals(cusId))
                     .Include(x => x.Package)
                         .ThenInclude(x => x.PackageProduct)
                             .ThenInclude(x => x.Product)
@@ -102,7 +102,7 @@ namespace SolarMP.Services
         {
             try
             {
-                var data = await this.context.ConstructionContract.Where(x => x.Status && x.ConstructioncontractId.Equals(constructionContractId))
+                var data = await this.context.ConstructionContract.Where(x => x.ConstructioncontractId.Equals(constructionContractId))
                     .Include(x => x.Package)
                         .ThenInclude(x => x.PackageProduct)
                             .ThenInclude(x => x.Product)
@@ -135,7 +135,7 @@ namespace SolarMP.Services
         {
             try
             {
-                var data = await this.context.ConstructionContract.Where(x => x.Status && x.Staffid.Equals(StaffId))
+                var data = await this.context.ConstructionContract.Where(x => x.Staffid.Equals(StaffId))
                     .Include(x => x.Package)
                         .ThenInclude(x => x.PackageProduct)
                             .ThenInclude(x => x.Product)
@@ -179,7 +179,7 @@ namespace SolarMP.Services
                 _constructionContract.Staffid = constructionContract.Staffid;
                 _constructionContract.PackageId = constructionContract.PackageId;
                 _constructionContract.BracketId = constructionContract.BracketId;
-                _constructionContract.Status = true;
+                _constructionContract.Status = "1";
 
                 var pck = await this.context.Package.Where(x => x.PackageId.Equals(constructionContract.PackageId))
                     .Include(x=>x.Promotion)

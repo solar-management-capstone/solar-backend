@@ -3,7 +3,7 @@
     public class ConstructionContractUpdateDTO
     {
         public string ConstructioncontractId { get; set; }
-        public bool? Status { get; set; }
+        public string? Status { get; set; }
         public DateTime? Startdate { get; set; }
         public DateTime? Enddate { get; set; }
         public decimal? Totalcost { get; set; }

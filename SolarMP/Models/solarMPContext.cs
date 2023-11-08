@@ -42,7 +42,7 @@ namespace SolarMP.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Data Source=solar123.database.windows.net;Initial Catalog=solarMP;User ID=solar;Password=Quyen123@");
+                optionsBuilder.UseSqlServer("Data Source=solar123.database.windows.net;Initial Catalog=solarMP;Persist Security Info=True;User ID=solar;Password=Quyen123@");
             }
         }
 
@@ -87,7 +87,7 @@ namespace SolarMP.Models
                 entity.HasOne(d => d.Customer)
                     .WithMany(p => p.ConstructionContractCustomer)
                     .HasForeignKey(d => d.CustomerId)
-                    .HasConstraintName("FK_ConstructionContract_Account1");
+                    .HasConstraintName("FK_ConstructionContract_Account");
 
                 entity.HasOne(d => d.Package)
                     .WithMany(p => p.ConstructionContract)
@@ -97,7 +97,7 @@ namespace SolarMP.Models
                 entity.HasOne(d => d.Staff)
                     .WithMany(p => p.ConstructionContractStaff)
                     .HasForeignKey(d => d.Staffid)
-                    .HasConstraintName("FK_ConstructionContract_Account");
+                    .HasConstraintName("FK_ConstructionContract_Account1");
             });
 
             modelBuilder.Entity<Feedback>(entity =>
