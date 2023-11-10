@@ -23,7 +23,7 @@ namespace SolarMP.Controllers
         /// <summary>
         /// </summary>
         /// <returns></returns>
-        [Authorize(Roles = "1, 2")]
+        [Authorize(Roles = "1, 2, 3, 4")]
         [Route("get-all")]
         [HttpGet]
         public async Task<IActionResult> GetAll()
