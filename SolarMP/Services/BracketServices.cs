@@ -92,6 +92,8 @@ namespace SolarMP.Services
                 _bracket.Name= bracket.Name;
                 _bracket.Price = bracket.Price;
                 _bracket.Manufacturer= bracket.Manufacturer;
+                _bracket.Size = bracket.Size ?? null;
+                _bracket.Material = bracket.Material ?? null;
                 _bracket.Status = true;
                 await this.context.Bracket.AddAsync(_bracket);
                 this.context.SaveChanges();
@@ -130,6 +132,8 @@ namespace SolarMP.Services
                     _bracket.Price = upBracket.Price ?? _bracket.Price;
                     _bracket.Manufacturer = upBracket.Manufacturer ?? _bracket.Manufacturer;
                     _bracket.Status = upBracket.Status ?? _bracket.Status;
+                    _bracket.Size = upBracket.Size ?? _bracket.Size;
+                    _bracket.Material = upBracket.Material ?? _bracket.Material;
                     context.Bracket.Update(_bracket);
                     this.context.SaveChanges();
 

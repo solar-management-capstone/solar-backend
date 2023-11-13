@@ -56,6 +56,10 @@ namespace SolarMP.Models
         public string BracketId { get; set; }
         [Column("description")]
         public string Description { get; set; }
+        [Column("surveyId")]
+        [StringLength(16)]
+        [Unicode(false)]
+        public string SurveyId { get; set; }
 
         [ForeignKey("BracketId")]
         [InverseProperty("ConstructionContract")]
@@ -69,6 +73,9 @@ namespace SolarMP.Models
         [ForeignKey("Staffid")]
         [InverseProperty("ConstructionContractStaff")]
         public virtual Account Staff { get; set; }
+        [ForeignKey("SurveyId")]
+        [InverseProperty("ConstructionContract")]
+        public virtual Survey Survey { get; set; }
         [InverseProperty("ConstructionContract")]
         public virtual ICollection<Acceptance> Acceptance { get; set; }
         [InverseProperty("ContructionContract")]

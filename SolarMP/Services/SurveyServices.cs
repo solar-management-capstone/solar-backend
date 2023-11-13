@@ -42,6 +42,7 @@ namespace SolarMP.Services
             try
             {
                 var data = await this.context.Survey.Where(x => x.Status)
+                    .Include(x=>x.ConstructionContract)
                     .Include(x=>x.Staff)
                     .ToListAsync();
                 if (data.Count > 0 && data != null)
@@ -64,6 +65,7 @@ namespace SolarMP.Services
             try
             {
                 var data = await this.context.Survey.Where(x => x.Status && x.SurveyId.Equals(surveyId))
+                    .Include(x => x.ConstructionContract)
                     .Include(x => x.Staff)
                     .ToListAsync();
                 if (data.Count > 0 && data != null)
@@ -86,6 +88,7 @@ namespace SolarMP.Services
             try
             {
                 var data = await this.context.Survey.Where(x => x.Status && x.StaffId.Equals(surveyId))
+                    .Include(x => x.ConstructionContract)
                     .Include(x => x.Staff)
                     .ToListAsync();
                 if (data.Count > 0 && data != null)

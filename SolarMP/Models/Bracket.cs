@@ -25,6 +25,10 @@ namespace SolarMP.Models
         public string Name { get; set; }
         [Column("price", TypeName = "decimal(16, 0)")]
         public decimal? Price { get; set; }
+        [Column("material")]
+        public string Material { get; set; }
+        [Column("size", TypeName = "decimal(16, 0)")]
+        public decimal? Size { get; set; }
         [Column("manufacturer")]
         public string Manufacturer { get; set; }
         [Column("status")]

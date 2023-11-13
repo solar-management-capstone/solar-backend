@@ -11,6 +11,8 @@ namespace SolarMP.DTOs.Bracket
         public string Name { get; set; }
         public decimal? Price { get; set; }
         public string Manufacturer { get; set; }
+        public decimal? Size { get; set; }
+        public string? Material { get; set; }
         public List<ImageDTO>? image { get; set; }
     }
 }

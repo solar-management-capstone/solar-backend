@@ -56,6 +56,7 @@ namespace SolarMP.Services
                     .Include(x=>x.Acceptance)
                     .Include(x=>x.Feedback)
                     .Include(x=>x.WarrantyReport)
+                    .Include(x=>x.Survey)
                     .ToListAsync();
                 return data;
             }
@@ -84,6 +85,7 @@ namespace SolarMP.Services
                     .Include(x => x.Acceptance)
                     .Include(x => x.Feedback)
                     .Include(x => x.WarrantyReport)
+                    .Include(x => x.Survey)
                     .ToListAsync();
                 if (data.Count > 0 && data != null)
                     return data;
@@ -117,6 +119,7 @@ namespace SolarMP.Services
                     .Include(x => x.Acceptance)
                     .Include(x => x.Feedback)
                     .Include(x => x.WarrantyReport)
+                    .Include(x => x.Survey)
                     .ToListAsync();
                 if (data.Count > 0 && data != null)
                     return data;
@@ -150,6 +153,7 @@ namespace SolarMP.Services
                     .Include(x => x.Acceptance)
                     .Include(x => x.Feedback)
                     .Include(x => x.WarrantyReport)
+                    .Include(x => x.Survey)
                     .ToListAsync();
                 if (data.Count > 0 && data != null)
                     return data;
@@ -181,6 +185,7 @@ namespace SolarMP.Services
                 _constructionContract.BracketId = constructionContract.BracketId;
                 _constructionContract.Status = "1";
                 _constructionContract.Description = constructionContract.Description ?? null;
+                _constructionContract.SurveyId = constructionContract.SurveyId ?? null;
 
                 var pck = await this.context.Package.Where(x => x.PackageId.Equals(constructionContract.PackageId))
                     .Include(x=>x.Promotion)
@@ -221,6 +226,7 @@ namespace SolarMP.Services
                     _constructionContract.BracketId = upConstructionContract.BracketId ?? _constructionContract.BracketId;
                     _constructionContract.Status = upConstructionContract.Status ?? _constructionContract.Status;
                     _constructionContract.Description = upConstructionContract.Description ?? _constructionContract.Description;
+                    _constructionContract.SurveyId = upConstructionContract.SurveyId ?? _constructionContract.SurveyId;
 
                     //decimal tmp = 0;
                     //decimal tmpbck = 0;

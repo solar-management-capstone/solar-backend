@@ -14,6 +14,7 @@
         public string? PackageId { get; set; }
         public string? BracketId { get; set; }
         public string? Description { get; set; }
+        public string? SurveyId { get; set; }
 
     }
 }

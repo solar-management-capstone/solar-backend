@@ -98,6 +98,11 @@ namespace SolarMP.Models
                     .WithMany(p => p.ConstructionContractStaff)
                     .HasForeignKey(d => d.Staffid)
                     .HasConstraintName("FK_ConstructionContract_Account1");
+
+                entity.HasOne(d => d.Survey)
+                    .WithMany(p => p.ConstructionContract)
+                    .HasForeignKey(d => d.SurveyId)
+                    .HasConstraintName("FK_ConstructionContract_Survey");
             });
 
             modelBuilder.Entity<Feedback>(entity =>
