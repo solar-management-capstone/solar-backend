@@ -59,6 +59,7 @@ namespace SolarMP.Services
                     .Include(x=>x.WarrantyReport)
                     .Include(x=>x.Survey)
                     .ToListAsync();
+
                 return data;
             }
             catch (Exception ex)
