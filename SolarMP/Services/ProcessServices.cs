@@ -40,6 +40,7 @@ namespace SolarMP.Services
             {
                 var check = await this.context.Process.Where(x => x.Status)
                     .Include(x=>x.Image)
+                    .OrderBy(x=>x.CreateAt)
                     .ToListAsync();
                 if (check != null)
                 {
@@ -62,6 +63,7 @@ namespace SolarMP.Services
             {
                 var check = await this.context.Process.Where(x => x.Status && x.ContractId.Equals(id))
                     .Include(x => x.Image)
+                    .OrderBy(x => x.CreateAt)
                     .ToListAsync();
                 if (check != null)
                 {
@@ -84,6 +86,7 @@ namespace SolarMP.Services
             {
                 var check = await this.context.Process.Where(x => x.ProcessId.Equals(id))
                     .Include(x => x.Image)
+                    .OrderBy(x => x.CreateAt)
                     .FirstOrDefaultAsync();
                 if (check != null)
                 {
