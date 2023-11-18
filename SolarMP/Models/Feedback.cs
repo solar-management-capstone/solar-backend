@@ -18,6 +18,8 @@ namespace SolarMP.Models
         [Required]
         [Column("description")]
         public string Description { get; set; }
+        [Column("rating")]
+        public int? Rating { get; set; }
         [Column("createAt", TypeName = "datetime")]
         public DateTime CreateAt { get; set; }
         [Column("status")]

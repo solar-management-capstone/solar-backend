@@ -85,6 +85,7 @@ namespace SolarMP.Services
                 feedback.PackageId = dto.PackageId;
                 feedback.Status = true;
                 feedback.CreateAt = DateTime.Now;
+                feedback.Rating = dto.Rating;
                 feedback.AccountId = dto.AccountId;
                 feedback.Description = dto.Description;
                 feedback.Image= dto.Image ?? "none";

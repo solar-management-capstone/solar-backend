@@ -12,5 +12,6 @@ namespace SolarMP.DTOs.Feedback
         public string AccountId { get; set; }
         public string? Image { get; set; }
         public string PackageId { get; set; }
+        public int? Rating { get; set; }
     }
 }

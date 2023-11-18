@@ -81,6 +81,15 @@ namespace SolarMP.Controllers
                 return BadRequest(responseAPI);
             }
         }
+        /// <summary>
+        /// 0: Đã hủy
+        /// 1: Chờ duyệt 
+        /// 2: Hoạt động
+        /// 3: Nghiệm thu
+        /// 4: Hoàn thành
+        /// </summary>
+        /// <param name="upConstructionContract"></param>
+        /// <returns></returns>
         [Route("Update-construction-contract-with-id")]
         [HttpPut]
         public async Task<IActionResult> UpdateConstructionContract(ConstructionContractUpdateDTO upConstructionContract)
@@ -100,8 +109,9 @@ namespace SolarMP.Controllers
         /// <summary>
         /// 0: Đã hủy
         /// 1: Chờ duyệt 
-        /// 2: Hoạt Động
-        /// 3: Hoàn thành
+        /// 2: Hoạt động
+        /// 3: Nghiệm thu
+        /// 4: Hoàn thành
         /// </summary>
         /// <param name="constructionContract"></param>
         /// <returns></returns>
