@@ -10,5 +10,6 @@ namespace SolarMP.DTOs.Survey
         public string Description { get; set; }
         public string Note { get; set; }
         public string StaffId { get; set; }
+        public string? RequestId { get; set; }
     }
 }

@@ -79,6 +79,10 @@ namespace SolarMP.Models
 
             modelBuilder.Entity<ConstructionContract>(entity =>
             {
+                entity.HasIndex(e => e.SurveyId, "survey")
+                    .IsUnique()
+                    .HasFilter("([surveyId] IS NOT NULL)");
+
                 entity.HasOne(d => d.Bracket)
                     .WithMany(p => p.ConstructionContract)
                     .HasForeignKey(d => d.BracketId)
@@ -100,8 +104,8 @@ namespace SolarMP.Models
                     .HasConstraintName("FK_ConstructionContract_Account1");
 
                 entity.HasOne(d => d.Survey)
-                    .WithMany(p => p.ConstructionContract)
-                    .HasForeignKey(d => d.SurveyId)
+                    .WithOne(p => p.ConstructionContract)
+                    .HasForeignKey<ConstructionContract>(d => d.SurveyId)
                     .HasConstraintName("FK_ConstructionContract_Survey");
             });
 

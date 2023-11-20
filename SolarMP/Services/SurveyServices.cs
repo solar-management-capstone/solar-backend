@@ -114,6 +114,7 @@ namespace SolarMP.Services
                 _survey.Note= survey.Note;
                 _survey.StaffId= survey.StaffId;
                 _survey.Status = true;
+                _survey.RequestId = survey.RequestId ?? null;
                 await this.context.Survey.AddAsync(_survey);
                 this.context.SaveChanges();
                 return true;
@@ -135,6 +136,7 @@ namespace SolarMP.Services
                     _survey.Note = upSurvey.Note ?? _survey.Note;
                     _survey.StaffId = upSurvey.StaffId ?? _survey.StaffId;
                     _survey.Status = upSurvey.Status ?? _survey.Status;
+                    _survey.RequestId = upSurvey.RequestId ?? _survey.RequestId;
                     context.Survey.Update(_survey);
                     this.context.SaveChanges();
                     return true;

@@ -10,11 +10,6 @@ namespace SolarMP.Models
 {
     public partial class Survey
     {
-        public Survey()
-        {
-            ConstructionContract = new HashSet<ConstructionContract>();
-        }
-
         [Key]
         [Column("surveyId")]
         [StringLength(16)]
@@ -42,6 +37,6 @@ namespace SolarMP.Models
         [InverseProperty("Survey")]
         public virtual Account Staff { get; set; }
         [InverseProperty("Survey")]
-        public virtual ICollection<ConstructionContract> ConstructionContract { get; set; }
+        public virtual ConstructionContract ConstructionContract { get; set; }
     }
 }
