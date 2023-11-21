@@ -185,6 +185,7 @@ namespace SolarMP.Services
                 package.ElectricBill = dto.ElectricBill ?? 0;
                 package.Description = dto.Description;
                 package.PackageId = "PCK" + Guid.NewGuid().ToString().Substring(0,13);
+                package.PresentImage = dto.PresentImage ?? null;
 
                 await this.context.Package.AddAsync(package);
                 await this.context.SaveChangesAsync();
@@ -259,6 +260,7 @@ namespace SolarMP.Services
                     check.PromotionId = dto.PromotionId ?? check.PromotionId;
                     check.RoofArea = dto.RoofArea ?? check.RoofArea;
                     check.ElectricBill = dto.ElectricBill ?? check.ElectricBill;
+                    check.PresentImage = dto.PresentImage ?? check.PresentImage;
                     if(dto.IsDisablePromotion == true)
                     {
                         check.PromotionId = null;

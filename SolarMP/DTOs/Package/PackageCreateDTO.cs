@@ -10,6 +10,6 @@ namespace SolarMP.DTOs.Package
         public string? PromotionId { get; set; }
         public int? RoofArea { get; set; }
         public decimal? ElectricBill { get; set; }
-
+        public string? PresentImage { get; set; }
     }
 }

@@ -58,6 +58,7 @@ namespace SolarMP.Services
                     .Include(x=>x.Feedback)
                     .Include(x=>x.WarrantyReport)
                     .Include(x=>x.Survey)
+                        .ThenInclude(x=>x.Request)
                     .ToListAsync();
 
                 return data;
@@ -89,6 +90,7 @@ namespace SolarMP.Services
                     .Include(x => x.Feedback)
                     .Include(x => x.WarrantyReport)
                     .Include(x => x.Survey)
+                        .ThenInclude(x => x.Request)
                     .ToListAsync();
                 if (data.Count > 0 && data != null)
                     return data;
@@ -124,6 +126,7 @@ namespace SolarMP.Services
                     .Include(x => x.Feedback)
                     .Include(x => x.WarrantyReport)
                     .Include(x => x.Survey)
+                        .ThenInclude(x => x.Request)
                     .ToListAsync();
                 if (data.Count > 0 && data != null)
                     return data;
@@ -159,6 +162,7 @@ namespace SolarMP.Services
                     .Include(x => x.Feedback)
                     .Include(x => x.WarrantyReport)
                     .Include(x => x.Survey)
+                        .ThenInclude(x => x.Request)
                     .ToListAsync();
                 if (data.Count > 0 && data != null)
                     return data;

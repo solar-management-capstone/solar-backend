@@ -15,5 +15,6 @@ namespace SolarMP.DTOs.Package
         public bool? IsDisablePromotion { get; set; } = false;
         public int? RoofArea { get; set; }
         public decimal? ElectricBill { get; set; }
+        public string? PresentImage { get; set; }
     }
 }

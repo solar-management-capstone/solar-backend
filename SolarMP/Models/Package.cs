@@ -41,6 +41,8 @@ namespace SolarMP.Models
         public int? RoofArea { get; set; }
         [Column("electricBill", TypeName = "decimal(18, 0)")]
         public decimal? ElectricBill { get; set; }
+        [Column("presentImage")]
+        public string PresentImage { get; set; }
 
         [ForeignKey("PromotionId")]
         [InverseProperty("Package")]
