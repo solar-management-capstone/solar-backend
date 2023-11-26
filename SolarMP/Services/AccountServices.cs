@@ -19,7 +19,6 @@ namespace SolarMP.Services
 
         public async Task<bool> addTeam(TeamDTO dto)
         {
-            var ListFinal = new List<string>();
             try
             {
                 var delete = await this.context.Team.Where(x=>x.StaffLeadId.Equals(dto.LeaderId)).ToListAsync();
@@ -34,7 +33,7 @@ namespace SolarMP.Services
                 }
                 foreach(var x in dto.member)
                 {
-                    var checkMem = await this.context.Account.Where(x=>x.AccountId.Equals(x.AccountId) && x.IsLeader == false && x.RoleId == "3" && x.Status)
+                    var checkMem = await this.context.Account.Where(x=>x.AccountId.Equals(x.AccountId) && x.IsLeader != true && x.RoleId == "3" && x.Status)
                         .FirstOrDefaultAsync();
                     if(checkMem == null)
                     {
@@ -55,23 +54,12 @@ namespace SolarMP.Services
                     await this.context.Team.AddAsync(team);
                     await this.context.SaveChangesAsync();
 
-                    ListFinal.Add(x.memberId);
                 }
 
                 return true;
             }catch (Exception ex)
             {
                 throw new Exception(ex.Message);
-            }
-            finally
-            {
-                foreach(var a in ListFinal)
-                {
-                    var check = await this.context.Team.Where(x=>x.StaffLeadId.Equals(dto.LeaderId) && x.StaffId.Equals(a.ToString()))
-                        .FirstOrDefaultAsync();
-                    this.context.Team.Remove(check);
-                    await this.context.SaveChangesAsync();
-                }
             }
         }
 
@@ -368,5 +356,26 @@ namespace SolarMP.Services
                 throw new Exception(ex.Message);
             }
         }
+        public async Task<List<Account>> staffLeadNotTeam()
+        {
+            try
+            {
+                var account = await this.context.Account
+                    .Include(x => x.Role)
+                    .Include(x => x.ConstructionContractStaff)
+                    .Include(x => x.RequestAccount)
+                    .Include(x => x.RequestStaff)
+                    .Include(x => x.Survey)
+                    .Include(x => x.TeamStaffLead)
+                    .Where(x => x.IsLeader == true && x.Status && x.TeamStaffLead.Count == 0)
+                    .ToListAsync();
+                return account;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
     }
 }

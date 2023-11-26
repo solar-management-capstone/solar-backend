@@ -35,6 +35,22 @@ namespace SolarMP.Controllers
                 return BadRequest(responseAPI);
             }
         }
+        [Route("get-staff-not-have-team")]
+        [HttpGet]
+        public async Task<IActionResult> GetStaff()
+        {
+            ResponseAPI<List<Account>> responseAPI = new ResponseAPI<List<Account>>();
+            try
+            {
+                responseAPI.Data = await this._service.staffLeadNotTeam();
+                return Ok(responseAPI);
+            }
+            catch (Exception ex)
+            {
+                responseAPI.Message = ex.Message;
+                return BadRequest(responseAPI);
+            }
+        }
         [Route("get-all-member-by-staff")]
         [HttpGet]
         public async Task<IActionResult> GetAllMem(string StaffId)

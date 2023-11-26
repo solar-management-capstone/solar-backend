@@ -18,5 +18,6 @@ namespace SolarMP.Interfaces
         Task<Team> deleteMember(string leadId, string memberId);
         Task<List<Team>> getMemberStaff(string leadId);
         Task<List<Team>> getAllMember();
+        Task<List<Account>> staffLeadNotTeam();
     }
 }
