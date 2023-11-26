@@ -87,7 +87,7 @@
          "ObjectType": 0
       }
    ],
-   "UiHint": "solarcaps.solarMP",
+   "UiHint": "solar-caps.solarMP",
    "UncountableWords": null,
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": false,
