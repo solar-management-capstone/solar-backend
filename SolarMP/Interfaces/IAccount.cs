@@ -12,6 +12,7 @@ namespace SolarMP.Interfaces
         Task<Account> deleteHardCode(string id);
         Task<List<Account>> getByName(string name);
         Task<Account> getById(string id);
+        Task<Account> changePass(ChangePassDTO dto);
         Task<Account> update(AccountUpdateDTO dto);
         Task<bool> addTeam(TeamDTO dto);
         Task<List<Account>> search(string? name, string? phone, string? email);

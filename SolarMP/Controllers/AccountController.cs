@@ -123,6 +123,23 @@ namespace SolarMP.Controllers
                 return BadRequest(responseAPI);
             }
         }
+        [AllowAnonymous]
+        [Route("ChangePass")]
+        [HttpPut]
+        public async Task<IActionResult> ChangePass(ChangePassDTO dto)
+        {
+            ResponseAPI<List<Account>> responseAPI = new ResponseAPI<List<Account>>();
+            try
+            {
+                responseAPI.Data = await this._service.changePass(dto);
+                return Ok(responseAPI);
+            }
+            catch (Exception ex)
+            {
+                responseAPI.Message = ex.Message;
+                return BadRequest(responseAPI);
+            }
+        }
 
         [Authorize(Roles = "1")]
         [Route("delete-Account")]

@@ -377,5 +377,30 @@ namespace SolarMP.Services
             }
         }
 
+        public async Task<Account> changePass(ChangePassDTO dto)
+        {
+            try
+            {
+                var check = await this.context.Account.Where(x => x.AccountId == dto.accountId).FirstOrDefaultAsync();
+                if (check != null)
+                {
+                    if (!(BCrypt.Net.BCrypt.Verify(dto.oldPass, check.Password)))
+                    {
+                        throw new Exception("Mật khẩu không đúng!");
+                    }
+                    check.Password = BCrypt.Net.BCrypt.HashPassword(dto.newPass);
+                    this.context.Account.Update(check);
+                    await this.context.SaveChangesAsync();
+                    return check;
+                }
+                else
+                {
+                    throw new Exception("Không tìm thấy accountId");
+                }
+            }catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
