@@ -2,6 +2,7 @@
 using SolarMP.DTOs.ConstructionContract;
 using SolarMP.Interfaces;
 using SolarMP.Models;
+using System;
 
 namespace SolarMP.Services
 {
@@ -65,7 +66,43 @@ namespace SolarMP.Services
             }
             catch (Exception ex)
             {
-                throw new Exception();
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public  List<ConstructionContract> GetAllConstructionContractsByCusIDv2(CusManyStatusDTO dto)
+        {
+            try
+            {
+                var result = new List<ConstructionContract>();
+                foreach (var item in dto.status)
+                {
+                    var check = this.context.ConstructionContract
+                        .Where(x => x.CustomerId.Equals(dto.customerId) && x.Status.Equals(item.status))
+                    .Include(x => x.Package)
+                        .ThenInclude(x => x.PackageProduct)
+                            .ThenInclude(x => x.Product)
+                                .ThenInclude(x => x.Image)
+                    .Include(x => x.Package)
+                        .ThenInclude(x => x.Promotion)
+                    .Include(x => x.Bracket)
+                    .Include(x => x.PaymentProcess)
+                    .Include(x => x.Staff)
+                    .Include(x => x.Customer)
+                    .Include(x => x.Process.OrderBy(x => x.CreateAt))
+                        .ThenInclude(x => x.Image)
+                    .Include(x => x.Acceptance)
+                    .Include(x => x.Feedback)
+                    .Include(x => x.WarrantyReport)
+                    .Include(x => x.Survey)
+                        .ThenInclude(x => x.Request)
+                    .ToList();
+                    result.AddRange(check);
+                }
+                return result;
+            }catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
 

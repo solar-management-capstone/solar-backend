@@ -10,6 +10,7 @@ namespace SolarMP.Interfaces
         Task<List<ConstructionContract>> GetConstructionContractByCusId(string cusId, string? status);
         Task<List<ConstructionContract>> GetConstructionContractByStaffId(string StaffId);
         Task<List<ConstructionContract>> GetAllConstructionContracts();
+        List<ConstructionContract> GetAllConstructionContractsByCusIDv2(CusManyStatusDTO dto);
         Task<bool> UpdateConstructionContract(ConstructionContractUpdateDTO upConstructionContract);
         Task<bool> DeleteConstructionContract(string constructionContractId);
         Task<bool> InsertConstructionContract(ConstructionContractDTO constructionContract);

@@ -81,6 +81,22 @@ namespace SolarMP.Controllers
                 return BadRequest(responseAPI);
             }
         }
+        [Route("get-Construction-Contract-by-Customeridv2")]
+        [HttpPost]
+        public async Task<IActionResult> GetConstructionContractByCusv2(CusManyStatusDTO dto)
+        {
+            ResponseAPI<List<ConstructionContract>> responseAPI = new ResponseAPI<List<ConstructionContract>>();
+            try
+            {
+                responseAPI.Data = this.service.GetAllConstructionContractsByCusIDv2(dto);
+                return Ok(responseAPI);
+            }
+            catch (Exception ex)
+            {
+                responseAPI.Message = ex.Message;
+                return BadRequest(responseAPI);
+            }
+        }
         /// <summary>
         /// 0: Đã hủy
         /// 1: Chờ duyệt 
