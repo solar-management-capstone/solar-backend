@@ -157,16 +157,16 @@ namespace SolarMP.Services
         {
             try
             {
-                var check = await this.context.Request.Where(x => x.AccountId.Equals(dto.AccountId))
-                    .OrderByDescending(x => x.CreateAt)
-                    .FirstOrDefaultAsync();
-                if (check != null)
-                {
-                    if (check.CreateAt.AddMinutes(5) > DateTime.Now)
-                    {
-                        throw new Exception("Khách hàng tạo yêu cầu sau mỗi 5 phút");
-                    }
-                }
+                //var check = await this.context.Request.Where(x => x.AccountId.Equals(dto.AccountId))
+                //    .OrderByDescending(x => x.CreateAt)
+                //    .FirstOrDefaultAsync();
+                //if (check != null)
+                //{
+                //    if (check.CreateAt.AddMinutes(5) > DateTime.Now)
+                //    {
+                //        throw new Exception("Khách hàng tạo yêu cầu sau mỗi 5 phút");
+                //    }
+                //}
                 var request = new Request();
                 request.Status = true;
                 request.CreateAt = DateTime.Now;
