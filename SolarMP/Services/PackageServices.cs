@@ -239,6 +239,12 @@ namespace SolarMP.Services
                     this.context.Package.Update(pckCheck);
                     await this.context.SaveChangesAsync();
                 }
+                else
+                {
+                    pckCheck.PromotionPrice = pckCheck.Price;
+                    this.context.Package.Update(pckCheck);
+                    await this.context.SaveChangesAsync();
+                }
                 
                 return true;
             }catch(Exception ex)
