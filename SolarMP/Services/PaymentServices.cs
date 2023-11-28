@@ -70,6 +70,7 @@ namespace SolarMP.Services
                 pay.Status = "Paid";
                 pay.CreateAt = DateTime.Now;
                 pay.PaymentId = "PAY"+Guid.NewGuid().ToString().Substring(0,13);
+                pay.IsDeposit = dto.IsDeposit;
 
                 await this.context.PaymentProcess.AddAsync(pay);
                 await this.context.SaveChangesAsync();

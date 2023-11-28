@@ -313,11 +313,14 @@ namespace SolarMP.Services
                                     .FirstOrDefaultAsync();
 
                         decimal tmp = (decimal)pck.Price;
-                        if (pck.Promotion.StartDate < DateTime.Now && pck.Promotion.EndDate > DateTime.Now)
+                        if(pck.PromotionId != null)
                         {
-                            tmp = (decimal)pck.PromotionPrice;
+                            if (pck.Promotion.StartDate < DateTime.Now && pck.Promotion.EndDate > DateTime.Now)
+                            {
+                                tmp = (decimal)pck.PromotionPrice;
+                            }
                         }
-
+                        
                         _constructionContract.Totalcost = tmp + brc.Price;
                     }
                     
