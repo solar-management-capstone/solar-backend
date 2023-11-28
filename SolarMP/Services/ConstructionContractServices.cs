@@ -263,7 +263,9 @@ namespace SolarMP.Services
         {
             try
             {
-                ConstructionContract _constructionContract = await this.context.ConstructionContract.FirstAsync(x => x.ConstructioncontractId == upConstructionContract.ConstructioncontractId);
+                ConstructionContract _constructionContract = await this.context.ConstructionContract
+                    .Include(x=>x.Survey)
+                    .FirstAsync(x => x.ConstructioncontractId == upConstructionContract.ConstructioncontractId);
                 if (_constructionContract != null)
                 {
                     _constructionContract.Startdate = upConstructionContract.Startdate ?? _constructionContract.Startdate;
@@ -321,7 +323,15 @@ namespace SolarMP.Services
                     
                     context.ConstructionContract.Update(_constructionContract);
                     this.context.SaveChanges();
-                    //var disable = await this.context.Request.Where(x=>x.)
+                    if(upConstructionContract.SurveyId != null)
+                    {
+                        var disable = await this.context.Request.Where(x => x.RequestId.Equals(_constructionContract.Survey.RequestId))
+                        .FirstOrDefaultAsync();
+                        disable.Status = false;
+                        this.context.Request.Update(disable);
+                        await this.context.SaveChangesAsync();
+                    }
+                    
                     return true;
                 }
                 else
