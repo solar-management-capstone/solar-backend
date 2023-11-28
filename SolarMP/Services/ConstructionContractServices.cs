@@ -96,6 +96,7 @@ namespace SolarMP.Services
                     .Include(x => x.WarrantyReport)
                     .Include(x => x.Survey)
                         .ThenInclude(x => x.Request)
+                    .OrderByDescending(x=>x.Startdate)
                     .ToList();
                     result.AddRange(check);
                 }
