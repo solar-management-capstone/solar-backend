@@ -239,9 +239,12 @@ namespace SolarMP.Services
                 var brc = await this.context.Bracket.Where(x => x.BracketId.Equals(constructionContract.BracketId)).FirstOrDefaultAsync();
 
                 decimal tmp = (decimal)pck.Price;
-                if (pck.Promotion.StartDate < DateTime.Now && pck.Promotion.EndDate > DateTime.Now)
+                if(pck.PromotionId != null)
                 {
-                    tmp = (decimal)pck.PromotionPrice;
+                    if (pck.Promotion.StartDate < DateTime.Now && pck.Promotion.EndDate > DateTime.Now)
+                    {
+                        tmp = (decimal)pck.PromotionPrice;
+                    }
                 }
 
                 _constructionContract.Totalcost = tmp + brc.Price;
@@ -251,7 +254,7 @@ namespace SolarMP.Services
             }
             catch (Exception ex)
             {
-                throw new ArgumentException("Process went wrong");
+                throw new Exception(ex.Message);
             }
         }
 
