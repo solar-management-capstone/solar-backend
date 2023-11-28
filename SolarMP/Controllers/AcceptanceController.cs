@@ -17,7 +17,7 @@ namespace SolarMP.Controllers
             this.service = service;
         }
         /// <summary>
-        /// 
+        /// get all
         /// </summary>
         /// <returns></returns>
         [Route("get-all-Acceptance")]
