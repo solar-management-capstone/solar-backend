@@ -267,7 +267,7 @@ namespace SolarMP.Services
                         check.PromotionPrice = check.Price;
                     }
 
-                    if(check.Price > 0)
+                    if(check.Price > 0 && check.PromotionId != null)
                     {
                         var prom = await this.context.Promotion.Where(x => x.PromotionId.Equals(check.PromotionId)).FirstOrDefaultAsync();
                         check.PromotionPrice = check.Price - (check.Price * prom.Amount) / 100;
