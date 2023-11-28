@@ -44,7 +44,7 @@ namespace SolarMP.Controllers
                 else
                 {
                     // kiểm tra tài khoản
-                    var acc = await this._context.Account.Where(x=>x.Username.Equals(dto.Username) && x.Status)
+                    var acc = await this._context.Account.Where(x=>x.Username.Equals(dto.Username))
                         .Include(x=>x.Role)
                         .FirstOrDefaultAsync();
                     if(acc == null)
@@ -57,6 +57,10 @@ namespace SolarMP.Controllers
                         if (!(BCrypt.Net.BCrypt.Verify(dto.Password, acc.Password)))
                         {
                             throw new Exception("Mật khẩu không đúng!");
+                        }
+                        if (acc.Status == false && acc.RoleId =="4")
+                        {
+                            throw new Exception("Tài khoán chưa kích hoạt!");
                         }
                         // kiểm tra staff có phải là lead không
                         //if(acc.RoleId == "3")
