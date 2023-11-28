@@ -304,7 +304,8 @@ namespace SolarMP.Services
                     //}
                     //if (tmpbck > 0) { 
                     //}
-                    if(upConstructionContract.BracketId!= null || upConstructionContract.PackageId != null)
+                    // kiểm tra các thứ
+                    if(upConstructionContract.BracketId != null || upConstructionContract.PackageId != null)
                     {
                         var pck = await this.context.Package.Where(x => x.PackageId.Equals(upConstructionContract.PackageId))
                                     .Include(x => x.Promotion)
@@ -329,7 +330,7 @@ namespace SolarMP.Services
                     if(upConstructionContract.SurveyId != null)
                     {
                         var disable = await this.context.Request.Where(x => x.RequestId.Equals(_constructionContract.Survey.RequestId))
-                        .FirstOrDefaultAsync();
+                                .FirstOrDefaultAsync();
                         disable.Status = false;
                         this.context.Request.Update(disable);
                         await this.context.SaveChangesAsync();
