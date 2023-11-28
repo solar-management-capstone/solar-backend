@@ -321,6 +321,7 @@ namespace SolarMP.Services
                     
                     context.ConstructionContract.Update(_constructionContract);
                     this.context.SaveChanges();
+                    //var disable = await this.context.Request.Where(x=>x.)
                     return true;
                 }
                 else
