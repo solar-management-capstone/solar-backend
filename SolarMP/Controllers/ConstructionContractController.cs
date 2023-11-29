@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
 using SolarMP.DTOs;
 using SolarMP.DTOs.Acceptances;
 using SolarMP.DTOs.ConstructionContract;
@@ -96,6 +97,14 @@ namespace SolarMP.Controllers
                 return BadRequest(responseAPI);
             }
         }
+        /// <summary>
+        /// 0: Đã hủy
+        /// 1: Chờ duyệt 
+        /// 2: Hoạt Động
+        /// 3: Hoàn thành
+        /// </summary>
+        /// <param name="constructionContract"></param>
+        /// <returns></returns>
         [Route("Insert-Construction-contract")]
         [HttpPost]
         public async Task<IActionResult> InsertConstructionContract(ConstructionContractDTO constructionContract)

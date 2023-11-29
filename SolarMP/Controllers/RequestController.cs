@@ -117,7 +117,7 @@ namespace SolarMP.Controllers
 
         [Route("assign-staff")]
         [HttpPut]
-        public async Task<IActionResult> update(RequestUpdateDTO dto)
+        public async Task<IActionResult> assign(RequestUpdateDTO dto)
         {
             ResponseAPI<List<Request>> responseAPI = new ResponseAPI<List<Request>>();
             try
