@@ -20,12 +20,23 @@ namespace SolarMP.Services
                 var check = await this.context.Request.Where(x => x.RequestId.Equals(dto.RequestId)).FirstOrDefaultAsync();
                 if (check != null)
                 {
+                    var staff = await this.context.Account.Where(x => x.AccountId.Equals(dto.StaffId))
+                        .Include(x => x.RequestStaff.Where(x => x.Status))
+                        .FirstOrDefaultAsync();
+                    if (staff.RequestStaff.Count > 3)
+                    {
+                        throw new Exception("staff nhận 3 request");
+                    }
+
                     check.StaffId= dto.StaffId;
                     this.context.Request.Update(check);
                     await this.context.SaveChangesAsync();
-
-                    var staff = await this.context.Account.Where(x => x.AccountId.Equals(dto.StaffId)).FirstOrDefaultAsync();
-                    staff.IsFree = false;
+                    
+                    if (staff.RequestStaff.Count >=3)
+                    {
+                        staff.IsFree = false;
+                    }
+                    staff.IsFree = true;
                     this.context.Account.Update(staff);
                     await this.context.SaveChangesAsync();
                     return check;
