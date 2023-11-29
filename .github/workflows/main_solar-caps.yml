@@ -54,4 +54,4 @@ jobs:
           app-name: 'solar-caps'
           slot-name: 'Production'
           package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_FCD6E9F4B6D146F494B2B6F4F18A3FA8 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_85C82A748EA34B6892AD936D75A80652 }}
