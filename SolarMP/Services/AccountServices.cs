@@ -55,7 +55,7 @@ namespace SolarMP.Services
                     }
 
                     var team = new Team();
-                    team.StaffLeadId = dto.LeaderId;
+                    team.StaffLeadId = lead;
                     team.StaffId = x.memberId;
                     team.Status = true;
                     team.CreateAt = DateTime.Now;
