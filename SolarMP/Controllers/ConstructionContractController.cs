@@ -66,12 +66,12 @@ namespace SolarMP.Controllers
         }
         [Route("get-Construction-Contract-by-Customerid")]
         [HttpGet]
-        public async Task<IActionResult> GetConstructionContractByCus(string customerId)
+        public async Task<IActionResult> GetConstructionContractByCus([FromQuery] string customerId , string? status)
         {
             ResponseAPI<List<ConstructionContract>> responseAPI = new ResponseAPI<List<ConstructionContract>>();
             try
             {
-                responseAPI.Data = await this.service.GetConstructionContractByCusId(customerId);
+                responseAPI.Data = await this.service.GetConstructionContractByCusId(customerId,status);
                 return Ok(responseAPI);
             }
             catch (Exception ex)

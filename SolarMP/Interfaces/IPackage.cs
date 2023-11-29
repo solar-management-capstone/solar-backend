@@ -8,7 +8,7 @@ namespace SolarMP.Interfaces
         Task<Package> insert(PackageCreateDTO dto);
         Task<List<Package>> getAll();
         Task<List<Package>> getAllForAdmin();
-        Task<List<Package>> getAllForMobile(int count);
+        List<Package> getAllForMobile(int count);
         Task<Package> delete(string id);
         Task<List<Package>> getByName(string name);
         Task<Package> getById(string id);

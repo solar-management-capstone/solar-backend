@@ -286,10 +286,11 @@ namespace SolarMP.Services
             }
         }
 
-        public async Task<List<Package>> getAllForMobile(int count)
+        public  List<Package> getAllForMobile(int count)
         {
             try
             {
+                var result = new List<Package>();
                 var check = this.context.Package.Where(x => x.Status)
                     .Include(x => x.PackageProduct)
                         .ThenInclude(x => x.Product)
@@ -298,9 +299,13 @@ namespace SolarMP.Services
                     .Include(x => x.Feedback)
                     .OrderByDescending(x => x.ConstructionContract.Count)
                     .Take(count);
-                if (check != null)
+                foreach(var x in check)
                 {
-                    return (List<Package>)check;
+                    result.Add(x);
+                }
+                if (result != null)
+                {
+                    return result;
                 }
                 return null;
             }

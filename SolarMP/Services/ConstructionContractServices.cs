@@ -65,11 +65,11 @@ namespace SolarMP.Services
             }
         }
 
-        public async Task<List<ConstructionContract>> GetConstructionContractByCusId(string cusId)
+        public async Task<List<ConstructionContract>> GetConstructionContractByCusId(string cusId , string? status)
         {
             try
             {
-                var data = await this.context.ConstructionContract.Where(x => x.CustomerId.Equals(cusId))
+                var data = await this.context.ConstructionContract.Where(x => x.CustomerId.Equals(cusId) && x.Status.Equals(status))
                     .Include(x => x.Package)
                         .ThenInclude(x => x.PackageProduct)
                             .ThenInclude(x => x.Product)

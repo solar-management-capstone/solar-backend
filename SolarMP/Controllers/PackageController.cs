@@ -68,7 +68,7 @@ namespace SolarMP.Controllers
             ResponseAPI<List<Package>> responseAPI = new ResponseAPI<List<Package>>();
             try
             {
-                responseAPI.Data = await this.service.getAllForMobile(count);
+                responseAPI.Data = this.service.getAllForMobile(count);
                 return Ok(responseAPI);
             }
             catch (Exception ex)
