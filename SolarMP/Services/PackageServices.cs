@@ -60,7 +60,28 @@ namespace SolarMP.Services
         {
             try
             {
-                var check = await this.context.Package.Where(x => x.Status || x.RoofArea<=area || x.ElectricBill <= bill)
+                if(area != null && area > 0 && bill != null && bill >0)
+                {
+                    var full = await this.context.Package
+                    .Where(x => (x.RoofArea <= area && x.ElectricBill <= bill))
+                    .Where(x => x.Status)
+                    .Include(x => x.PackageProduct)
+                        .ThenInclude(x => x.Product)
+                            .ThenInclude(x => x.Image)
+                    .Include(x => x.Promotion)
+                    .Include(x => x.ConstructionContract)
+                    .Include(x => x.Feedback)
+                    .Include(x => x.Request)
+                    .ToListAsync();
+
+                    if(full != null && full.Count>0)
+                    {
+                        return full;
+                    }
+                }
+                var check = await this.context.Package
+                    .Where(x => (x.RoofArea <= area || x.ElectricBill <= bill))
+                    .Where(x => x.Status)
                     .Include(x => x.PackageProduct)
                         .ThenInclude(x => x.Product)
                             .ThenInclude(x => x.Image)
