@@ -24,12 +24,20 @@ namespace SolarMP.Services
                 var delete = await this.context.Team.Where(x=>x.StaffLeadId.Equals(dto.LeaderId)).ToListAsync();
                 this.context.Team.RemoveRange(delete);
                 await this.context.SaveChangesAsync();
-
-                var checkLead = await this.context.Account.Where(x => x.AccountId.Equals(dto.LeaderId) && x.IsLeader == true && x.RoleId == "3")
+                var lead = dto.LeaderId;
+                if(dto.newLeaderId != null)
+                {
+                    lead = dto.newLeaderId;
+                }
+                var checkLead = await this.context.Account.Where(x => x.AccountId.Equals(lead) && x.IsLeader == true && x.RoleId == "3")
                     .FirstOrDefaultAsync();
                 if (checkLead == null)
                 {
                     throw new Exception("Staff này không phải leader");
+                }
+                if(dto.member.Count == 0)
+                {
+                    return true;
                 }
                 foreach(var x in dto.member)
                 {
