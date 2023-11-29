@@ -204,10 +204,10 @@ namespace SolarMP.Services
                     this.context.Request.Update(check);
                     await this.context.SaveChangesAsync();
 
-                    var staff = await this.context.Account.Where(x => x.AccountId.Equals(check.AccountId))
+                    var staff = await this.context.Account.Where(x => x.AccountId.Equals(check.StaffId))
                     .Include(x => x.RequestStaff.Where(x => x.Status))
                     .FirstOrDefaultAsync();
-                    if(staff == null)
+                    if(staff != null)
                     {
                         staff.IsFree = true;
                         this.context.Account.Update(staff);
