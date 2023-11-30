@@ -422,7 +422,7 @@ namespace SolarMP.Services
                     .Include(x => x.RequestStaff)
                     .Include(x => x.Survey)
                     .Include(x => x.TeamStaffLead)
-                    .Where(x => x.IsLeader != true && x.Status && x.RoleId == "3" && x.TeamStaff.Count == 0)
+                    .Where(x => x.Status && x.RoleId == "3" && ( x.TeamStaffLead.Count ==0))
                     .ToListAsync();
                 return account;
             }
