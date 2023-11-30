@@ -41,6 +41,11 @@ namespace SolarMP.Services
             try
             {
                 var check = await this.context.WarrantyReport.Where(x => x.Status)
+                    .Include(x => x.Contract)
+                        .ThenInclude(x=>x.Package)
+                            .ThenInclude(x=>x.PackageProduct)
+                                .ThenInclude(x=>x.Product)
+                    .Include(x => x.Account)
                     .Include(x => x.Image)
                     .ToListAsync();
                 if (check != null)
@@ -64,6 +69,11 @@ namespace SolarMP.Services
             {
                 var check = await this.context.WarrantyReport
                     .Include(x => x.Image)
+                    .Include(x => x.Contract)
+                        .ThenInclude(x => x.Package)
+                            .ThenInclude(x => x.PackageProduct)
+                                .ThenInclude(x => x.Product)
+                    .Include(x => x.Account)
                     .ToListAsync();
                 if (check != null)
                 {
@@ -86,6 +96,11 @@ namespace SolarMP.Services
             {
                 var check = await this.context.WarrantyReport.Where(x => x.ContractId.Equals(id))
                     .Include(x => x.Image)
+                    .Include(x => x.Contract)
+                        .ThenInclude(x => x.Package)
+                            .ThenInclude(x => x.PackageProduct)
+                                .ThenInclude(x => x.Product)
+                    .Include(x => x.Account)
                     .ToListAsync();
                 if (check != null)
                 {
@@ -108,6 +123,11 @@ namespace SolarMP.Services
             {
                 var check = await this.context.WarrantyReport.Where(x => x.AccountId.Equals(id))
                     .Include(x => x.Image)
+                    .Include(x => x.Contract)
+                        .ThenInclude(x => x.Package)
+                            .ThenInclude(x => x.PackageProduct)
+                                .ThenInclude(x => x.Product)
+                    .Include(x => x.Account)
                     .ToListAsync();
                 if (check != null)
                 {
@@ -172,6 +192,7 @@ namespace SolarMP.Services
                     prorpt.WarrantyId = dto.WarrantyId;
                     prorpt.Status = true;
                     prorpt.AmountofDamageProduct = x.AmountofDamageProduct;
+                    prorpt.DoWarranty = x.DoWanrranty ?? null;
 
                     await this.context.ProductWarrantyReport.AddAsync(prorpt);
                     await this.context.SaveChangesAsync();

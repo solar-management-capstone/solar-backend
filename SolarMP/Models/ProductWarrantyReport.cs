@@ -24,6 +24,8 @@ namespace SolarMP.Models
         public decimal? AmountofDamageProduct { get; set; }
         [Column("status")]
         public bool Status { get; set; }
+        [Column("doWarranty")]
+        public string DoWarranty { get; set; }
 
         [ForeignKey("ProductId")]
         [InverseProperty("ProductWarrantyReport")]
