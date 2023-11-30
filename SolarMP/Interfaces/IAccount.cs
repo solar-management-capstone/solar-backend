@@ -20,5 +20,6 @@ namespace SolarMP.Interfaces
         Task<List<Team>> getMemberStaff(string leadId);
         Task<List<Team>> getAllMember();
         Task<List<Account>> staffLeadNotTeam();
+        Task<List<Account>> staffNotTeam();
     }
 }

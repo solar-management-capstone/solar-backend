@@ -410,5 +410,26 @@ namespace SolarMP.Services
                 throw new Exception(ex.Message);
             }
         }
+
+        public async Task<List<Account>> staffNotTeam()
+        {
+            try
+            {
+                var account = await this.context.Account
+                    .Include(x => x.Role)
+                    .Include(x => x.ConstructionContractStaff)
+                    .Include(x => x.RequestAccount)
+                    .Include(x => x.RequestStaff)
+                    .Include(x => x.Survey)
+                    .Include(x => x.TeamStaffLead)
+                    .Where(x => x.IsLeader != true && x.Status && x.RoleId == "3" && x.TeamStaff.Count == 0)
+                    .ToListAsync();
+                return account;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
