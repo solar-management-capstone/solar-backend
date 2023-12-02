@@ -2,6 +2,6 @@
 {
     public class MemberDTO
     {
-        public string memberId { get; set; }
+        public string? memberId { get; set; }
     }
 }
