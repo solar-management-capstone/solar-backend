@@ -35,20 +35,20 @@ namespace SolarMP.Services
                 {
                     throw new Exception("Staff này không phải leader");
                 }
-                if(dto.member.Count == 0)
+                if(dto.member.Count == 0 || dto.member == null)
                 {
                     return true;
                 }
-                foreach(var x in dto.member)
+                foreach(var m in dto.member)
                 {
-                    var checkMem = await this.context.Account.Where(x=>x.AccountId.Equals(x.AccountId) && x.IsLeader != true && x.RoleId == "3" && x.Status)
+                    var checkMem = await this.context.Account.Where(x=>x.AccountId.Equals(m.memberId) && x.IsLeader != true && x.RoleId == "3" && x.Status)
                         .FirstOrDefaultAsync();
                     if(checkMem == null)
                     {
                         throw new Exception("tài khoản " + checkMem.AccountId + "không phù hợp để thêm vào nhóm");
                     }
 
-                    var check = await this.context.Team.Where(x => x.StaffId.Equals(x.StaffId) && x.Status).FirstOrDefaultAsync();
+                    var check = await this.context.Team.Where(x => x.StaffId.Equals(m.memberId) && x.Status).FirstOrDefaultAsync();
                     if (check != null)
                     {
                         throw new Exception("tài khoản " + checkMem.AccountId + "đã có nhóm");
@@ -56,7 +56,7 @@ namespace SolarMP.Services
 
                     var team = new Team();
                     team.StaffLeadId = lead;
-                    team.StaffId = x.memberId;
+                    team.StaffId = m.memberId;
                     team.Status = true;
                     team.CreateAt = DateTime.Now;
                     await this.context.Team.AddAsync(team);
