@@ -8,9 +8,9 @@ namespace SolarMP.DTOs.Payment
 {
     public class PaymentDTO
     {
-        public decimal Amount { get; set; }
+        //public decimal Amount { get; set; }
         public string ConstructionContractId { get; set; }
-        public bool IsDeposit { get; set; }
+        //public bool IsDeposit { get; set; }
         public string AccountId { get; set; }
     }
 }

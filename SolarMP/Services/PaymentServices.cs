@@ -63,14 +63,64 @@ namespace SolarMP.Services
         {
             try
             {
+                var check = await this.context.ConstructionContract
+                    .Where(x => x.ConstructioncontractId.Equals(dto.ConstructionContractId))
+                    .FirstOrDefaultAsync();
+                if (check == null)
+                {
+                    throw new Exception("Hợp đồng không tồn tại");
+                }
+                if(check.Status == "2")
+                {
+                    var deposit = await this.context.PaymentProcess
+                        .Where(x => x.ConstructionContractId.Equals(dto.ConstructionContractId) && x.IsDeposit)
+                        .FirstOrDefaultAsync();
+                    if(deposit != null)
+                    {
+                        if(deposit.Status == "Paid")
+                        {
+                            return deposit;
+                        }
+                        if(deposit.Status == "success")
+                        {
+                            throw new Exception("Đã thanh toán cọc");
+                        }
+                    }
+                }
+                if(check.Status == "3")
+                {
+                    var payment = await this.context.PaymentProcess
+                        .Where(x => x.ConstructionContractId.Equals(dto.ConstructionContractId) && !x.IsDeposit)
+                        .FirstOrDefaultAsync();
+                    if (payment != null)
+                    {
+                        if (payment.Status == "Paid")
+                        {
+                            return payment;
+                        }
+                        if (payment.Status == "success")
+                        {
+                            throw new Exception("Đã thanh toán phần còn lại");
+                        }
+                    }
+                }
+                if(check.Status != "3" && check.Status != "2")
+                {
+                    throw new Exception("Hợp đồng chưa tới giai đoạn thanh toán");
+                } 
                 var pay = new PaymentProcess();
                 pay.AccountId= dto.AccountId;
                 pay.ConstructionContractId= dto.ConstructionContractId;
-                pay.Amount= dto.Amount;
+                pay.Amount= (decimal)(check.Totalcost /2);
                 pay.Status = "Paid";
                 pay.CreateAt = DateTime.Now;
-                pay.PaymentId = "PAY"+Guid.NewGuid().ToString().Substring(0,13);
-                pay.IsDeposit = dto.IsDeposit;
+                pay.PaymentId = "PAY" + Guid.NewGuid().ToString().Substring(0, 13);
+                pay.IsDeposit = false;
+                if (check.Status == "2")
+                {
+                    pay.IsDeposit = true;
+                }
+                
 
                 await this.context.PaymentProcess.AddAsync(pay);
                 await this.context.SaveChangesAsync();
