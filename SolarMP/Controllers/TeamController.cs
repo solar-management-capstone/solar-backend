@@ -120,23 +120,23 @@ namespace SolarMP.Controllers
                 return BadRequest(responseAPI);
             }
         }
-        //[Route("delete")]
-        //[HttpDelete]
-        //public async Task<IActionResult> delete([FromQuery] string leadId, string memberId)
-        //{
+        [Route("delete")]
+        [HttpDelete]
+        public async Task<IActionResult> delete(string? leadId)
+        {
 
-        //    ResponseAPI<List<Account>> responseAPI = new ResponseAPI<List<Account>>();
-        //    try
-        //    {
-        //        responseAPI.Data = await this._service.deleteMember(leadId,memberId);
-        //        responseAPI.Message = "success";
-        //        return Ok(responseAPI);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        responseAPI.Message = ex.Message;
-        //        return BadRequest(responseAPI);
-        //    }
-        //}
+            ResponseAPI<List<Account>> responseAPI = new ResponseAPI<List<Account>>();
+            try
+            {
+                responseAPI.Data = await this._service.deleteMember(leadId);
+                responseAPI.Message = "success";
+                return Ok(responseAPI);
+            }
+            catch (Exception ex)
+            {
+                responseAPI.Message = ex.Message;
+                return BadRequest(responseAPI);
+            }
+        }
     }
 }

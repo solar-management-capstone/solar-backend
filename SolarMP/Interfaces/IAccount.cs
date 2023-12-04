@@ -16,7 +16,7 @@ namespace SolarMP.Interfaces
         Task<Account> update(AccountUpdateDTO dto);
         Task<bool> addTeam(TeamDTO dto);
         Task<List<Account>> search(string? name, string? phone, string? email);
-        Task<Team> deleteMember(string leadId, string memberId);
+        Task<bool> deleteMember(string? leadId);
         Task<List<Team>> getMemberStaff(string leadId);
         Task<List<Team>> getAllMember();
         Task<List<Account>> staffLeadNotTeam();

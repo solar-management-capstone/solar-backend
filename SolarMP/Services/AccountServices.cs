@@ -120,17 +120,16 @@ namespace SolarMP.Services
             }
         }
 
-        public async Task<Team> deleteMember(string leadId, string memberId)
+        public async Task<bool> deleteMember(string? leadId)
         {
             try
             {
-                var check = await this.context.Team.Where(x=>x.StaffLeadId.Equals(leadId) && x.StaffId.Equals(memberId)).FirstOrDefaultAsync();
+                var check = await this.context.Team.Where(x=>x.StaffLeadId.Equals(leadId)).ToListAsync();
                 if (check != null)
                 {
-                    check.Status = false;
-                    this.context.Team.Update(check);
+                    this.context.Team.RemoveRange(check);
                     await this.context.SaveChangesAsync();
-                    return check;
+                    return true;
                 }
                 else
                 {
