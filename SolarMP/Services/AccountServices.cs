@@ -35,7 +35,7 @@ namespace SolarMP.Services
                 {
                     throw new Exception("Staff này không phải leader");
                 }
-                if(dto.member.Count == 0 || dto.member == null)
+                if(dto.member == null)
                 {
                     return true;
                 }

@@ -13,8 +13,8 @@ namespace SolarMP.Controllers
     {
         private readonly IConfiguration _configuration;
         protected readonly solarMPContext context;
-        public string VNPAY_TMNCODE = "QEXW80Z4";
-        public string VNPAY_HASH_SECRECT = "GVVBRNETROHVFHCFGWHXHZFKXQHMRQZC";
+        public string VNPAY_TMNCODE = "B406HZGA";
+        public string VNPAY_HASH_SECRECT = "GQUAWUAEWSHKGQSBPCTSWMUWIAEFSUYV";
         public string VNPAY_VERSION = "2.0.0";
 
         public VNPayController(IConfiguration configuration , solarMPContext context)
