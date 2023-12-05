@@ -46,6 +46,8 @@ namespace SolarMP.Services
             {
                 var check = await this.context.Product.Where(x => x.Status)
                     .Include(x => x.Image)
+                    .Include(x=>x.ProductWarrantyReport)
+                        .ThenInclude(x=>x.Warranty)
                     .ToListAsync();
                 if (check != null)
                 {
@@ -65,6 +67,8 @@ namespace SolarMP.Services
             {
                 var check = await this.context.Product
                     .Include(x => x.Image)
+                    .Include(x => x.ProductWarrantyReport)
+                        .ThenInclude(x => x.Warranty)
                     .ToListAsync();
                 if (check != null)
                 {
@@ -84,6 +88,8 @@ namespace SolarMP.Services
             {
                 var check = await this.context.Product.Where(x => x.ProductId.Equals(id))
                     .Include(x => x.Image)
+                    .Include(x => x.ProductWarrantyReport)
+                        .ThenInclude(x => x.Warranty)
                     .FirstOrDefaultAsync();
                 if (check != null)
                 {
@@ -103,6 +109,8 @@ namespace SolarMP.Services
             {
                 var check = await this.context.Product.Where(x => x.Status && x.Name.Contains(name))
                     .Include(x => x.Image)
+                    .Include(x => x.ProductWarrantyReport)
+                        .ThenInclude(x => x.Warranty)
                     .ToListAsync();
                 if (check != null)
                 {
