@@ -20,8 +20,8 @@ namespace SolarMP.Models
         [StringLength(16)]
         [Unicode(false)]
         public string WarrantyId { get; set; }
-        [Column("amountofDamageProduct", TypeName = "decimal(10, 2)")]
-        public decimal? AmountofDamageProduct { get; set; }
+        [Column("amountofDamageProduct")]
+        public bool? AmountofDamageProduct { get; set; }
         [Column("status")]
         public bool Status { get; set; }
         [Column("doWarranty")]
