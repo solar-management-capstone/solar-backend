@@ -11,6 +11,7 @@ namespace SolarMP.DTOs.ConstructionContract
         public DateTime? Enddate { get; set; }
         public decimal? Totalcost { get; set; }
         public bool? IsConfirmed { get; set; }
+        public string? status { get; set; }
         public string ImageFile { get; set; }
         public string CustomerId { get; set; }
         public string Staffid { get; set; }

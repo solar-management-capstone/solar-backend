@@ -230,7 +230,7 @@ namespace SolarMP.Services
                 _constructionContract.Staffid = constructionContract.Staffid;
                 _constructionContract.PackageId = constructionContract.PackageId;
                 _constructionContract.BracketId = constructionContract.BracketId;
-                _constructionContract.Status = "1";
+                _constructionContract.Status = constructionContract.status ?? "1";
                 _constructionContract.Description = constructionContract.Description ?? null;
                 _constructionContract.SurveyId = constructionContract.SurveyId ?? null;
 
