@@ -167,7 +167,7 @@ namespace SolarMP.Services
             try
             {
                 var check = await this.context.Account
-                    .Where(x => x.IsLeader == true && x.Status)
+                    .Where(x => x.IsLeader == true && x.Status && x.TeamStaffLead.Count > 0)
                     .Include(x => x.TeamStaff)
                     .Include(x => x.TeamStaffLead)
                         .ThenInclude(x => x.Staff)
