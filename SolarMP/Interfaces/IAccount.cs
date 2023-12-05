@@ -21,5 +21,6 @@ namespace SolarMP.Interfaces
         Task<List<Account>> getAllMember();
         Task<List<Account>> staffLeadNotTeam();
         Task<List<Account>> staffNotTeam();
+        Task<List<TeamRes>> getAllMemberv2();
     }
 }

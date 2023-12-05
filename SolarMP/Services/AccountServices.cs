@@ -179,6 +179,45 @@ namespace SolarMP.Services
             }
         }
 
+        public async Task<List<TeamRes>> getAllMemberv2()
+        {
+            try
+            {
+                var result = new List<TeamRes>();
+                var team = new TeamRes();
+                var check = await this.context.Account
+                    .Where(x => x.IsLeader == true && x.Status && x.TeamStaffLead.Count > 0)
+                    .Include(x => x.TeamStaffLead)
+                    .ToListAsync();
+                if(check != null)
+                {
+                    foreach (var t in check)
+                    {
+                        team.staffLead = t;
+                        team.staff = new List<Account>();
+                        foreach (var m in t.TeamStaffLead)
+                        {
+                            var mem = await this.context.Account
+                            .Where(x => x.AccountId == m.StaffId)
+                            .FirstOrDefaultAsync();
+                            if(mem != null)
+                            {
+                                team.staff.Add(mem);
+                            }
+                        }
+                        result.Add(team);
+                        team = new TeamRes();
+                    }
+                }
+                
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public async Task<Account> getById(string id)
         {
             try

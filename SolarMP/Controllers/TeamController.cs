@@ -26,7 +26,7 @@ namespace SolarMP.Controllers
             ResponseAPI<List<Account>> responseAPI = new ResponseAPI<List<Account>>();
             try
             {
-                responseAPI.Data = await this._service.getAllMember();
+                responseAPI.Data = await this._service.getAllMemberv2();
                 return Ok(responseAPI);
             }
             catch (Exception ex)

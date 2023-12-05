@@ -205,6 +205,10 @@ namespace SolarMP.Services
         {
             try
             {
+                var warranty = await this.context.ProductWarrantyReport
+                    .Where(x=>x.WarrantyId.Equals(dto.WarrantyId))
+                    .ToListAsync();
+                this.context.ProductWarrantyReport.RemoveRange(warranty);
                 foreach(var x in dto.damages)
                 {
                     var prorpt = new ProductWarrantyReport();
