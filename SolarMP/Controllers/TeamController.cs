@@ -23,7 +23,7 @@ namespace SolarMP.Controllers
         public async Task<IActionResult> GetAll()
         {
 
-            ResponseAPI<List<Team>> responseAPI = new ResponseAPI<List<Team>>();
+            ResponseAPI<List<Account>> responseAPI = new ResponseAPI<List<Account>>();
             try
             {
                 responseAPI.Data = await this._service.getAllMember();

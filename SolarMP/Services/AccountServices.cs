@@ -162,13 +162,15 @@ namespace SolarMP.Services
             }
         }
 
-        public async Task<List<Team>> getAllMember()
+        public async Task<List<Account>> getAllMember()
         {
             try
             {
-                var check = await this.context.Team
-                    .Include(x=>x.StaffLead)
-                    .Include(x=>x.Staff)
+                var check = await this.context.Account
+                    .Where(x => x.IsLeader == true && x.Status)
+                    .Include(x => x.TeamStaff)
+                    .Include(x => x.TeamStaffLead)
+                        .ThenInclude(x => x.Staff)
                     .ToListAsync();
                 return check;
             }catch(Exception ex)

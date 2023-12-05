@@ -1,4 +1,4 @@
-﻿using SolarMP.DTOs.Account;
+﻿ using SolarMP.DTOs.Account;
 using SolarMP.DTOs.Account.Team;
 using SolarMP.Models;
 
@@ -18,7 +18,7 @@ namespace SolarMP.Interfaces
         Task<List<Account>> search(string? name, string? phone, string? email);
         Task<bool> deleteMember(string? leadId);
         Task<List<Team>> getMemberStaff(string leadId);
-        Task<List<Team>> getAllMember();
+        Task<List<Account>> getAllMember();
         Task<List<Account>> staffLeadNotTeam();
         Task<List<Account>> staffNotTeam();
     }

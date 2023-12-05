@@ -42,11 +42,14 @@ namespace SolarMP.Services
             {
                 var check = await this.context.WarrantyReport.Where(x => x.Status)
                     .Include(x => x.Contract)
-                        .ThenInclude(x=>x.Package)
-                            .ThenInclude(x=>x.PackageProduct)
-                                .ThenInclude(x=>x.Product)
+                        .ThenInclude(x => x.Package)
+                            .ThenInclude(x => x.PackageProduct)
+                                .ThenInclude(x => x.Product)
                     .Include(x => x.Account)
                     .Include(x => x.Image)
+                    .Include(x => x.ProductWarrantyReport)
+                        .ThenInclude(x => x.Product)
+                            .ThenInclude(x => x.Image)
                     .ToListAsync();
                 if (check != null)
                 {
@@ -74,6 +77,9 @@ namespace SolarMP.Services
                             .ThenInclude(x => x.PackageProduct)
                                 .ThenInclude(x => x.Product)
                     .Include(x => x.Account)
+                    .Include(x => x.ProductWarrantyReport)
+                        .ThenInclude(x => x.Product)
+                            .ThenInclude(x => x.Image)
                     .ToListAsync();
                 if (check != null)
                 {
@@ -101,6 +107,9 @@ namespace SolarMP.Services
                             .ThenInclude(x => x.PackageProduct)
                                 .ThenInclude(x => x.Product)
                     .Include(x => x.Account)
+                    .Include(x => x.ProductWarrantyReport)
+                        .ThenInclude(x => x.Product)
+                            .ThenInclude(x => x.Image)
                     .ToListAsync();
                 if (check != null)
                 {
@@ -128,6 +137,9 @@ namespace SolarMP.Services
                             .ThenInclude(x => x.PackageProduct)
                                 .ThenInclude(x => x.Product)
                     .Include(x => x.Account)
+                    .Include(x => x.ProductWarrantyReport)
+                        .ThenInclude(x => x.Product)
+                            .ThenInclude(x => x.Image)
                     .ToListAsync();
                 if (check != null)
                 {
