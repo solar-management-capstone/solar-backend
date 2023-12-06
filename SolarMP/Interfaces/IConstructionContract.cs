@@ -6,7 +6,7 @@ namespace SolarMP.Interfaces
 {
     public interface IConstructionContract
     {
-        Task<List<ConstructionContract>> GetConstructionContractById(string? constructionContractId);
+        Task<ConstructionContract> GetConstructionContractById(string? constructionContractId);
         Task<List<ConstructionContract>> GetConstructionContractByCusId(string cusId, string? status);
         Task<List<ConstructionContract>> GetConstructionContractByStaffId(string StaffId);
         Task<List<ConstructionContract>> GetAllConstructionContracts();

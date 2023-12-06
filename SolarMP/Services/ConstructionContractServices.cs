@@ -143,7 +143,7 @@ namespace SolarMP.Services
             }
         }
 
-        public async Task<List<ConstructionContract>> GetConstructionContractById(string? constructionContractId)
+        public async Task<ConstructionContract> GetConstructionContractById(string? constructionContractId)
         {
             try
             {
@@ -165,8 +165,8 @@ namespace SolarMP.Services
                     .Include(x => x.WarrantyReport)
                     .Include(x => x.Survey)
                         .ThenInclude(x => x.Request)
-                    .ToListAsync();
-                if (data.Count > 0 && data != null)
+                    .FirstOrDefaultAsync();
+                if (data != null)
                     return data;
                 else
                 {
