@@ -31,6 +31,8 @@ namespace SolarMP.Models
         public string RequestId { get; set; }
         [Column("kWPerMonth", TypeName = "decimal(16, 2)")]
         public decimal? KWperMonth { get; set; }
+        [Column("roofArea", TypeName = "decimal(16, 2)")]
+        public decimal? RoofArea { get; set; }
 
         [ForeignKey("RequestId")]
         [InverseProperty("Survey")]

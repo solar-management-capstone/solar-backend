@@ -12,5 +12,6 @@ namespace SolarMP.DTOs.Survey
         public string StaffId { get; set; }
         public string? RequestId { get; set; }
         public decimal? KWperMonth { get; set; }
+        public decimal? RoofArea { get; set; }
     }
 }

@@ -119,6 +119,7 @@ namespace SolarMP.Services
                 _survey.Status = true;
                 _survey.RequestId = survey.RequestId ?? null;
                 _survey.KWperMonth = survey.KWperMonth ?? 0;
+                _survey.RoofArea = survey.RoofArea ?? 0;
                 await this.context.Survey.AddAsync(_survey);
                 this.context.SaveChanges();
                 return true;
@@ -142,6 +143,7 @@ namespace SolarMP.Services
                     _survey.Status = upSurvey.Status ?? _survey.Status;
                     _survey.RequestId = upSurvey.RequestId ?? _survey.RequestId;
                     _survey.KWperMonth = upSurvey.KWperMonth ?? _survey.KWperMonth;
+                    _survey.RoofArea = upSurvey.RoofArea ?? _survey.RoofArea;
                     context.Survey.Update(_survey);
                     this.context.SaveChanges();
                     return true;
