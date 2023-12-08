@@ -11,5 +11,6 @@ namespace SolarMP.DTOs.Survey
         public string Note { get; set; }
         public string StaffId { get; set; }
         public string? RequestId { get; set; }
+        public decimal? KWperMonth { get; set; }
     }
 }
