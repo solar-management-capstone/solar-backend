@@ -33,6 +33,8 @@ namespace SolarMP.Models
         public string Manufacturer { get; set; }
         [Column("status")]
         public bool Status { get; set; }
+        [Column("createAt", TypeName = "datetime")]
+        public DateTime? CreateAt { get; set; }
 
         [InverseProperty("Bracket")]
         public virtual ICollection<ConstructionContract> ConstructionContract { get; set; }

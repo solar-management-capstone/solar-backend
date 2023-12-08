@@ -43,6 +43,8 @@ namespace SolarMP.Models
         public decimal? ElectricBill { get; set; }
         [Column("presentImage")]
         public string PresentImage { get; set; }
+        [Column("createAt", TypeName = "datetime")]
+        public DateTime? CreateAt { get; set; }
 
         [ForeignKey("PromotionId")]
         [InverseProperty("Package")]

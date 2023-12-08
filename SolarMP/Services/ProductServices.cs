@@ -136,6 +136,7 @@ namespace SolarMP.Services
                 product.Feature = dto.Feature;
                 product.WarrantyDate = dto.WarrantyDate;
                 product.Status = true;
+                product.CreateAt = DateTime.Now;
 
                 await this.context.Product.AddAsync(product);
                 await this.context.SaveChangesAsync();

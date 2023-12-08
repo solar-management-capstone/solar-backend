@@ -95,6 +95,7 @@ namespace SolarMP.Services
                 _bracket.Size = bracket.Size ?? null;
                 _bracket.Material = bracket.Material ?? null;
                 _bracket.Status = true;
+                _bracket.CreateAt = DateTime.Now;
                 await this.context.Bracket.AddAsync(_bracket);
                 this.context.SaveChanges();
 

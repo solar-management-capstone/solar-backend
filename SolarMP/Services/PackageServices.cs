@@ -186,6 +186,7 @@ namespace SolarMP.Services
                 package.Description = dto.Description;
                 package.PackageId = "PCK" + Guid.NewGuid().ToString().Substring(0,13);
                 package.PresentImage = dto.PresentImage ?? null;
+                package.CreateAt = DateTime.Now;
 
                 await this.context.Package.AddAsync(package);
                 await this.context.SaveChangesAsync();
