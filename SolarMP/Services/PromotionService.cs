@@ -42,6 +42,7 @@ namespace SolarMP.Services
             try
             {
                 var data = await this.context.Promotion
+                    .OrderByDescending(x=>x.CreateAt)
                     .ToListAsync();
                 return data;
             }

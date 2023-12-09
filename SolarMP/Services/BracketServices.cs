@@ -43,6 +43,7 @@ namespace SolarMP.Services
             {
                 var data = await this.context.Bracket.Where(x => x.Status)
                     .Include(x => x.Image)
+                    .OrderByDescending(x => x.CreateAt)
                     .ToListAsync();
                 return data;
             }
@@ -57,6 +58,7 @@ namespace SolarMP.Services
             {
                 var data = await this.context.Bracket
                     .Include(x => x.Image)
+                    .OrderByDescending(x => x.CreateAt)
                     .ToListAsync();
                 return data;
             }

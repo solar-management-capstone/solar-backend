@@ -48,6 +48,7 @@ namespace SolarMP.Services
                     .Include(x => x.Image)
                     .Include(x=>x.ProductWarrantyReport)
                         .ThenInclude(x=>x.Warranty)
+                    .OrderByDescending(x => x.CreateAt)
                     .ToListAsync();
                 if (check != null)
                 {
@@ -69,6 +70,7 @@ namespace SolarMP.Services
                     .Include(x => x.Image)
                     .Include(x => x.ProductWarrantyReport)
                         .ThenInclude(x => x.Warranty)
+                    .OrderByDescending(x => x.CreateAt)
                     .ToListAsync();
                 if (check != null)
                 {
@@ -111,6 +113,7 @@ namespace SolarMP.Services
                     .Include(x => x.Image)
                     .Include(x => x.ProductWarrantyReport)
                         .ThenInclude(x => x.Warranty)
+                    .OrderByDescending(x => x.CreateAt)
                     .ToListAsync();
                 if (check != null)
                 {

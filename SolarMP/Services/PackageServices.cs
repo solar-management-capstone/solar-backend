@@ -44,6 +44,7 @@ namespace SolarMP.Services
                     .Include(x=>x.ConstructionContract)
                     .Include(x=>x.Feedback)
                     .Include(x=>x.Request)
+                    .OrderByDescending(x => x.CreateAt)
                     .ToListAsync();
                 if (check != null)
                 {
@@ -72,6 +73,7 @@ namespace SolarMP.Services
                     .Include(x => x.ConstructionContract)
                     .Include(x => x.Feedback)
                     .Include(x => x.Request)
+                    .OrderByDescending(x => x.CreateAt)
                     .ToListAsync();
 
                     if(full != null && full.Count>0)
@@ -89,6 +91,7 @@ namespace SolarMP.Services
                     .Include(x => x.ConstructionContract)
                     .Include(x => x.Feedback)
                     .Include(x => x.Request)
+                    .OrderByDescending(x => x.CreateAt)
                     .ToListAsync();
                 if (check != null)
                 {
@@ -111,6 +114,7 @@ namespace SolarMP.Services
                         .ThenInclude(x => x.Product)
                             .ThenInclude(x => x.Image)
                     .Include(x => x.Promotion)
+                    .OrderByDescending(x => x.CreateAt)
                     .ToListAsync();
                 if (check != null)
                 {
@@ -158,6 +162,7 @@ namespace SolarMP.Services
                         .ThenInclude(x => x.Product)
                             .ThenInclude(x => x.Image)
                     .Include(x => x.Promotion)
+                    .OrderByDescending(x => x.CreateAt)
                     .ToListAsync();
                 if (check != null)
                 {
