@@ -60,6 +60,8 @@ namespace SolarMP.Models
         [StringLength(16)]
         [Unicode(false)]
         public string SurveyId { get; set; }
+        [Column("createAt", TypeName = "datetime")]
+        public DateTime? CreateAt { get; set; }
 
         [ForeignKey("BracketId")]
         [InverseProperty("ConstructionContract")]

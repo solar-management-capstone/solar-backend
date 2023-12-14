@@ -233,6 +233,7 @@ namespace SolarMP.Services
                 _constructionContract.Status = constructionContract.status ?? "1";
                 _constructionContract.Description = constructionContract.Description ?? null;
                 _constructionContract.SurveyId = constructionContract.SurveyId ?? null;
+                _constructionContract.CreateAt = DateTime.Now;
 
                 var pck = await this.context.Package.Where(x => x.PackageId.Equals(constructionContract.PackageId))
                     .Include(x=>x.Promotion)
