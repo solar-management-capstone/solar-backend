@@ -128,7 +128,15 @@ namespace SolarMP.Controllers
                 var vnp_OrderInfo = vnpay.GetResponseData("vnp_OrderInfo");
                 var vnp_TransDate = vnpay.GetResponseData("vnp_PayDate");
                 //Guid companyId = Guid.Parse(vnp_OrderInfo);
-                status = "success";
+                if(vnp_ResponseCode == "00")
+                {
+                    status = "success";
+                }
+                else
+                {
+                    return Redirect(returnUrl +"?status=" + status);
+                }
+                
 
                 string taxVNPay = orderId.ToString();
                 var check = await this.context.PaymentProcess.Where(x => x.TaxVnpay.Equals(taxVNPay)).FirstOrDefaultAsync();
