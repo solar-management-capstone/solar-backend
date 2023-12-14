@@ -128,7 +128,13 @@ namespace SolarMP.Services
         {
             try
             {
-                Bracket _bracket = await this.context.Bracket.FirstAsync(x => x.BracketId == upBracket.BracketId);
+                Bracket _bracket = await this.context.Bracket
+                    .Include(x=>x.ConstructionContract)
+                    .FirstAsync(x => x.BracketId == upBracket.BracketId);
+                if (_bracket.ConstructionContract.Count > 0)
+                {
+                    throw new Exception("Khung đỡ đã tồn tại trong hợp đồng, không thể chỉnh sửa");
+                }
                 if (_bracket != null)
                 {
                     _bracket.Name = upBracket.Name ?? _bracket.Name;

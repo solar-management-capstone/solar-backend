@@ -19,6 +19,7 @@ namespace SolarMP.Services
                 var check = await this.context.PaymentProcess
                     .Include(x => x.ConstructionContract)
                     .Include(x => x.Account)
+                    .OrderByDescending(x=>x.PayDate)
                     .ToListAsync();
                 return check;
             }catch(Exception ex)
@@ -34,6 +35,7 @@ namespace SolarMP.Services
                 var check = await this.context.PaymentProcess.Where(x=>x.ConstructionContractId.Equals(id))
                     .Include(x => x.ConstructionContract)
                     .Include(x => x.Account)
+                    .OrderByDescending(x => x.PayDate)
                     .ToListAsync();
                 return check;
             }
@@ -50,6 +52,7 @@ namespace SolarMP.Services
                 var check = await this.context.PaymentProcess.Where(x => x.AccountId.Equals(id))
                     .Include(x => x.ConstructionContract)
                     .Include(x => x.Account)
+                    .OrderByDescending(x => x.PayDate)
                     .ToListAsync();
                 return check;
             }

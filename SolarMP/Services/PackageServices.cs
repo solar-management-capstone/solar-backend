@@ -208,7 +208,13 @@ namespace SolarMP.Services
             try
             {
                 var check = await this.context.PackageProduct.Where(x => x.PackageId.Equals(dto.PackageId)).ToListAsync();
-                var pckCheck = await this.context.Package.Where(x => x.PackageId.Equals(dto.PackageId)).FirstOrDefaultAsync();
+                var pckCheck = await this.context.Package.Where(x => x.PackageId.Equals(dto.PackageId))
+                    .Include(x=>x.ConstructionContract)
+                    .FirstOrDefaultAsync();
+                if(pckCheck.ConstructionContract.Count > 0)
+                {
+                    throw new Exception("Không thể cập nhật gói sản phẩm!");
+                }
                 if (check != null && check.Count>0)
                 {
                     foreach(var item in check)
@@ -263,7 +269,13 @@ namespace SolarMP.Services
         {
             try
             {
-                var check = await this.context.Package.Where(x => x.PackageId.Equals(dto.PackageId)).FirstOrDefaultAsync();
+                var check = await this.context.Package.Where(x => x.PackageId.Equals(dto.PackageId))
+                    .Include(x => x.ConstructionContract)
+                    .FirstOrDefaultAsync();
+                if(check.ConstructionContract.Count() > 0)
+                {
+                    throw new Exception("Không thể cập nhật gói sản phẩm");
+                }
                 if (check != null)
                 {
                     check.Status = dto.Status ?? check.Status;
