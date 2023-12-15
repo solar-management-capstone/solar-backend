@@ -63,7 +63,7 @@ builder.Services.AddSwaggerGen(option =>
         BearerFormat = "JWT",
         Scheme = "Bearer"
     });
-
+    //set up jwt token authorize
     option.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
         {
@@ -96,11 +96,10 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 });
 
 
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-
+// Config swagger in production
 if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 {
     app.UseSwagger();

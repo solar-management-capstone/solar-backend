@@ -77,7 +77,7 @@ namespace SolarMP.Controllers
                 }
                 else
                 {
-                    throw new Exception("không tồn tại donate id");
+                    throw new Exception("Không tồn tại payment id");
                 }
 
             }
@@ -88,10 +88,6 @@ namespace SolarMP.Controllers
 
         }
 
-        /// <summary>
-        /// [Guest] Endpoint for company confirm payment with condition
-        /// </summary>
-        /// <returns></returns>
         [HttpGet("PaymentConfirm")]
         public async Task<IActionResult> Confirm()
         {
@@ -127,7 +123,7 @@ namespace SolarMP.Controllers
                 bool checkSignature = vnpay.ValidateSignature(vnp_SecureHash, vnp_HashSecret);
                 var vnp_OrderInfo = vnpay.GetResponseData("vnp_OrderInfo");
                 var vnp_TransDate = vnpay.GetResponseData("vnp_PayDate");
-                //Guid companyId = Guid.Parse(vnp_OrderInfo);
+               
                 if(vnp_ResponseCode == "00")
                 {
                     status = "success";
