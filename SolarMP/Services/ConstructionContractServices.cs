@@ -61,6 +61,7 @@ namespace SolarMP.Services
                     .Include(x=>x.WarrantyReport)
                     .Include(x=>x.Survey)
                         .ThenInclude(x=>x.Request)
+                    .OrderByDescending(x=> x.CreateAt)
                     .ToListAsync();
 
                 return data;
@@ -98,7 +99,7 @@ namespace SolarMP.Services
                     .Include(x => x.WarrantyReport)
                     .Include(x => x.Survey)
                         .ThenInclude(x => x.Request)
-                    .OrderByDescending(x=>x.Startdate)
+                    .OrderByDescending(x=>x.CreateAt)
                     .ToList();
                     result.AddRange(check);
                 }
@@ -132,6 +133,7 @@ namespace SolarMP.Services
                     .Include(x => x.WarrantyReport)
                     .Include(x => x.Survey)
                         .ThenInclude(x => x.Request)
+                    .OrderByDescending(x => x.CreateAt)
                     .ToListAsync();
                 if (data.Count > 0 && data != null)
                     return data;
@@ -146,19 +148,19 @@ namespace SolarMP.Services
             }
         }
 
-        public async Task<ConstructionContract> GetConstructionContractById(string? constructionContractId)
+        public async Task<ConstructionContract> GetConstructionContractById(string constructionContractId)
         {
             try
             {
                 var data = await this.context.ConstructionContract.Where(x => x.ConstructioncontractId.Equals(constructionContractId))
+                    .Include(x => x.Bracket)
+                        .ThenInclude(x => x.Image)
                     .Include(x => x.Package)
                         .ThenInclude(x => x.PackageProduct)
                             .ThenInclude(x => x.Product)
                                 .ThenInclude(x => x.Image)
                     .Include(x => x.Package)
                         .ThenInclude(x => x.Promotion)
-                    .Include(x => x.Bracket)
-                        .ThenInclude(x => x.Image)
                     .Include(x => x.PaymentProcess)
                     .Include(x => x.Staff)
                     .Include(x => x.Customer)
@@ -206,6 +208,7 @@ namespace SolarMP.Services
                     .Include(x => x.WarrantyReport)
                     .Include(x => x.Survey)
                         .ThenInclude(x => x.Request)
+                    .OrderByDescending(x => x.CreateAt)
                     .ToListAsync();
                 if (data.Count > 0 && data != null)
                     return data;

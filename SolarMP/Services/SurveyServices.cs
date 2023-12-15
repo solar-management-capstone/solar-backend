@@ -45,6 +45,7 @@ namespace SolarMP.Services
                     .Include(x=>x.ConstructionContract)
                     .Include(x=>x.Request)
                     .Include(x=>x.Staff)
+                    .OrderByDescending(x=>x.CreateAt)
                     .ToListAsync();
                 if (data.Count > 0 && data != null)
                 {
@@ -69,6 +70,7 @@ namespace SolarMP.Services
                     .Include(x => x.ConstructionContract)
                     .Include(x => x.Request)
                     .Include(x => x.Staff)
+                    .OrderByDescending(x => x.CreateAt)
                     .ToListAsync();
                 if (data.Count > 0 && data != null)
                 {
@@ -93,6 +95,7 @@ namespace SolarMP.Services
                     .Include(x => x.ConstructionContract)
                     .Include(x => x.Request)
                     .Include(x => x.Staff)
+                    .OrderByDescending(x => x.CreateAt)
                     .ToListAsync();
                 if (data.Count > 0 && data != null)
                     return data;

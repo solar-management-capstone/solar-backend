@@ -145,6 +145,29 @@ namespace SolarMP.Controllers
                 check.PayDateVnpay = vnp_TransDate;
                 this.context.PaymentProcess.Update(check);
                 await this.context.SaveChangesAsync();
+
+                if(check.IsDeposit == false)
+                {
+                    var contract = await this.context.ConstructionContract
+                    .Where(x => x.ConstructioncontractId.Equals(check.ConstructionContractId)).FirstOrDefaultAsync();
+                    if (contract != null && contract.SurveyId != null)
+                    {
+                        var survey = await this.context.Survey.Where(x => x.SurveyId.Equals(contract.SurveyId)).FirstOrDefaultAsync();
+                        if (survey.RequestId != null)
+                        {
+                            var request = await this.context.Request.Where(x => x.RequestId.Equals(survey.RequestId)).FirstOrDefaultAsync();
+                            if (request != null)
+                            {
+                                request.Status = false;
+                                this.context.Request.Update(request);
+                                await this.context.SaveChangesAsync();
+                            }
+                        }
+                        survey.Status = false;
+                        this.context.Survey.Update(survey);
+                        await this.context.SaveChangesAsync();
+                    }
+                }           
             }
 
             return Redirect(returnUrl + "?amount=" + amount + "&status=" + status);
