@@ -39,9 +39,10 @@ namespace SolarMP.Services
             try
             {
                 var check = await this.context.Feedback
-                    .Include(x=>x.Account)
-                    .Include(x=>x.ContructionContract)
-                    .Include(x=>x.Package)
+                    .Include(x => x.Account)
+                    .Include(x => x.ContructionContract)
+                    .Include(x => x.Package)
+                    .OrderByDescending(x => x.CreateAt)
                     .ToListAsync();
                 if (check != null)
                 {
@@ -64,6 +65,7 @@ namespace SolarMP.Services
                     .Include(x => x.Account)
                     .Include(x => x.ContructionContract)
                     .Include(x => x.Package)
+                    .OrderByDescending(x => x.CreateAt)
                     .ToListAsync();
                 if (check != null)
                 {
