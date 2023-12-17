@@ -213,7 +213,7 @@ namespace SolarMP.Services
                     .FirstOrDefaultAsync();
                 if(pckCheck.ConstructionContract.Count > 0)
                 {
-                    throw new Exception("Không thể cập nhật gói sản phẩm!");
+                    throw new Exception("Không thể cập nhật gói sản phẩm do có trong hợp đồng!");
                 }
                 if (check != null && check.Count>0)
                 {
