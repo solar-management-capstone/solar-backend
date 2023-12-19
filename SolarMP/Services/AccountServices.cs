@@ -329,8 +329,11 @@ namespace SolarMP.Services
                 }
                 await this.context.Account.AddAsync(account);
                 await this.context.SaveChangesAsync();
-
-                twilio.SendOTP(digitsOnly);
+                if(account.RoleId == "4")
+                {
+                    twilio.SendOTP(digitsOnly);
+                }
+                
 
                 return account;
             }
